@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package numberrangesummarizer;
 
 import java.util.Collection;
@@ -22,36 +25,9 @@ import java.util.Collection;
 public interface NumberRangeSummarizer {
 
     //collect the input
-    // Collection<Integer> collect(String input);
+    Collection<Integer> collect(String input);
 
     //get the summarized string
-    // String summarizeCollection(Collection<Integer> input);
-
-    public void method1();
+    String summarizeCollection(Collection<Integer> input);
 
 }
-
-class Demo implements NumberRangeSummarizer
-{
-   /* This class must have to implement both the abstract methods
-    * else you will get compilation error
-    */
-   //collect the input
-//    Collection<Integer> collect(String input);
-
-   //get the summarized string
-//    String summarizeCollection(Collection<Integer> input);
-
-public void method1()
-   {
-	System.out.println("implementation of method1");
-   }
-
-   public static void main(String arg[])
-   {
-	NumberRangeSummarizer obj = new Demo();
-	obj.method1();
-   }
-}
-
-
