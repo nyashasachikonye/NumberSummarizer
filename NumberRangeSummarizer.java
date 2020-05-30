@@ -29,5 +29,4 @@ public interface NumberRangeSummarizer {
 
     //get the summarized string
     String summarizeCollection(Collection<Integer> input);
-
 }
