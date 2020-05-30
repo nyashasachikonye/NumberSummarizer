@@ -6,6 +6,7 @@ package numberrangesummarizer;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,25 +46,21 @@ public class Demo implements NumberRangeSummarizer {
 	public String summarizeCollection(Collection<Integer> input) {
 		
 		// first of all sort the collection
-		Collections.sort(input.toArray());
-		// you can use a lambda expression here
 		
-//		for (Integer e: input)
-//		       System.out.println(e);
+		// create a sorted list
+		List<Integer> lList = new ArrayList<>();
 		
 		// Add an Iterator to input. 
         Iterator<Integer> it = input.iterator();
-     
-        // Display element by element using Iterator
-        // instantiate elements
-//        Integer thisElement = new Integer;
-//        
         while (it.hasNext())
         	// get this element
-//        	thisElement = Integer.valueOf(it.next().toString());
-            System.out.println(it.next()); 
-		
+        	// add it to the list to be sorted
+        	// (you can use a lambda expression here)
+            lList.add(it.next());
         
+        // sort the list
+		Collections.sort(lList);
+		
 		System.out.println("Done");
 		return null;
 	}
