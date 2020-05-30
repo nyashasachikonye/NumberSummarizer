@@ -61,6 +61,26 @@ public class Demo implements NumberRangeSummarizer {
         // sort the list
 		Collections.sort(lList);
 		
+		// create a stack
+		
+		
+		// if the next element is consecutive, then 
+		for(int i = 0; i < lList.size(); i++) {
+			// use an iterator maybe?
+			for(int j = i+1; j < lList.size(); j++) {
+//				System.out.println(i+" "+j);
+				if ((lList.get(i)+1) == lList.get(j)) {
+					continue;
+//					System.out.println((lList.get(i)+1)+" "+(lList.get(j)+ " No Discontinuity"));
+				}
+				else {
+//					System.out.println("Discontinuity Detected");
+					System.out.println(i+" "+j);
+					i = j;
+					break;
+				}
+			}
+		}
 		System.out.println("Done");
 		return null;
 	}
@@ -70,7 +90,7 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	public static void main(String[] args) {
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("1,3,6,7,8,12,13,14,2,15,21,22,23,24,31");
+		Collection<Integer> input = obj.collect("1,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
 		obj.summarizeCollection(input);
 	}
 
