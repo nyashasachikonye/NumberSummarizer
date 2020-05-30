@@ -61,26 +61,43 @@ public class Demo implements NumberRangeSummarizer {
         // sort the list
 		Collections.sort(lList);
 		
-		// create a stack
-		
-		
-		// if the next element is consecutive, then 
+		// result structure
+		List<String> result = new ArrayList<String>();
+
+		// if the next element is consecutive, then
+		String oldString = "";
+		String newString = "";
 		for(int i = 0; i < lList.size(); i++) {
 			// use an iterator maybe?
+			// write start to result set
+			result.add(lList.get(i).toString());
 			for(int j = i+1; j < lList.size(); j++) {
-//				System.out.println(i+" "+j);
-				if ((lList.get(i)+1) == lList.get(j)) {
-					continue;
-//					System.out.println((lList.get(i)+1)+" "+(lList.get(j)+ " No Discontinuity"));
+				if (lList.get(i)+1 == lList.get(j)){
+					// great
+					// extend the range of the last element in the result set
+					// get the last element
+					oldString = result.get(result.size()-1);
+					// if the old string was a range already
+					if (oldString.contains("-")){
+						// then get the upper limit
+						newString = oldString.split("-")[0]+"-"+lList.get(j);
+					}
+					else {
+						// then make it a range
+						newString = oldString + "-" + lList.get(j);
+					}
+					result.set(result.size()-1,  newString);
+					// now increment for the next pair
+					i = j;	
 				}
 				else {
-//					System.out.println("Discontinuity Detected");
-					System.out.println(i+" "+j);
-					i = j;
+					i = j-1;
 					break;
 				}
+						
 			}
 		}
+		System.out.println(result);
 		System.out.println("Done");
 		return null;
 	}
