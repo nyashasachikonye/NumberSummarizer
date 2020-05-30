@@ -4,6 +4,7 @@
 package numberrangesummarizer;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,6 +45,7 @@ public class Demo implements NumberRangeSummarizer {
 	public String summarizeCollection(Collection<Integer> input) {
 		
 		// first of all sort the collection
+		Collections.sort(input.toArray());
 		// you can use a lambda expression here
 		
 //		for (Integer e: input)
