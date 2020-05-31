@@ -169,9 +169,18 @@ public class Demo implements NumberRangeSummarizer {
 						
 			}
 		}
-		System.out.println(result);
+//		System.out.println(result);
 		//		System.out.println("Done");
-		return null;
+		String string_result = "";
+		for(String num_range : result) {
+			string_result = string_result + num_range + ", ";
+		};
+		
+		//trim last comma
+		string_result = string_result.substring(0, string_result.length()-2);
+		
+//		System.out.println(string_result);
+		return string_result;
 	}
 
 	/**

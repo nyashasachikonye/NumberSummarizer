@@ -42,5 +42,19 @@ class DemoTest {
 	}
 	
 	//tests for summarizeCollection method
+	/**
+	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 */
+	@Test
+	void testSummarizeCollectionGoldenPath() {
+		Demo demo = new Demo();
+		Collection<Integer> input = Arrays.asList(1, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
+		String expected = "1, 3, 6-8, 12-15, 21-24, 31";
+		String actual = demo.summarizeCollection(input);
+		assertEquals(expected, actual);
+	}
 	
+	
+//	("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
+//	[-8, -4--1, 6-8, 12-15, 21-24, 31]
 }
