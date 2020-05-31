@@ -36,16 +36,17 @@ public class Demo implements NumberRangeSummarizer {
 			
 			// check type
 			// if we can convert to integer, then convert to integer
+			Integer tempInt =  Integer.valueOf(0);
 			try {
 				// convert to int
-				Integer tempInt = Integer.valueOf(temp[i]);
+				tempInt = Integer.valueOf(temp[i]);
 			}
-			finally{
+			catch(NumberFormatException ex){
 				System.out.println("Invalid Input");
 				System.exit(0);
 			}						
 						
-			Integer tempInt = Integer.valueOf(temp[i]);
+//			Integer tempInt = Integer.valueOf(temp[i]);
 			// add to the output collection
 			
 			// check for duplicates
