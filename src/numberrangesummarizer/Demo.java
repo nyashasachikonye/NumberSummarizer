@@ -33,7 +33,18 @@ public class Demo implements NumberRangeSummarizer {
 		// convert all the elements of the array to Integer values
 		/** REMEMBER, these can also be floats etc **/
 		for(int i = 0; i < temp.length; i++) {
-			// convert to int
+			
+			// check type
+			// if we can convert to integer, then convert to integer
+			try {
+				// convert to int
+				Integer tempInt = Integer.valueOf(temp[i]);
+			}
+			finally{
+				System.out.println("Invalid Input");
+				System.exit(0);
+			}						
+						
 			Integer tempInt = Integer.valueOf(temp[i]);
 			// add to the output collection
 			
@@ -45,6 +56,8 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(tempInt);
 //			System.out.println(Arrays.toString(result.toArray()));
 		}
+		System.out.println(result);
+		System.exit(0);
 		return result;
 	}
 
@@ -113,7 +126,7 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	public static void main(String[] args) {
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("1,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
+		Collection<Integer> input = obj.collect("1,,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
 		obj.summarizeCollection(input);
 	}
 
