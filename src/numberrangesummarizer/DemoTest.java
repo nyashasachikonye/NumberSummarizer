@@ -54,7 +54,15 @@ class DemoTest {
 		assertEquals(expected, actual);
 	}
 	
-	
-//	("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
-//	[-8, -4--1, 6-8, 12-15, 21-24, 31]
+	/**
+	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 */
+	@Test
+	void testSummarizeCollectionNegativeNumbers() {
+		Demo demo = new Demo();
+		Collection<Integer> input = Arrays.asList(-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31);
+		String expected = "-8, -4--1, 6-8, 12-15, 21-24, 31";
+		String actual = demo.summarizeCollection(input);
+		assertEquals(expected, actual);
+	}
 }
