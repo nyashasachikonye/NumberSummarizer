@@ -16,6 +16,10 @@ import java.util.ArrayList;
  */
 public class Demo implements NumberRangeSummarizer {
 
+	/**
+	 * collect method explanantino
+	 * returns
+	 */
 	@Override
 	public Collection<Integer> collect(String input) {
 		/**
@@ -61,49 +65,63 @@ public class Demo implements NumberRangeSummarizer {
 		return result;
 	}
 
+	/**
+	 * summarizeCollection method explanation
+	 * returns
+	 */
 	@Override
 	public String summarizeCollection(Collection<Integer> input) {
 		
-		// first of all sort the collection
+		// sort the collection
 		
 		// create a sorted list
-		List<Integer> lList = new ArrayList<>();
+		List<Integer> negativesNumberList = new ArrayList<>();
+		
+		// create a sorted list
+		List<Integer> positivesNumberList = new ArrayList<>();
 		
 		// Add an Iterator to input. 
-        Iterator<Integer> it = input.iterator();
-        while (it.hasNext())
-        	// get this element
+		for (Integer num : input) 
+		{
         	// add it to the list to be sorted
         	// (you can use a lambda expression here)
-            lList.add(it.next());
+        	if (num > 0) {
+        		positivesNumberList.add(num);
+        	}
+        	else if(num < 0) {
+        		negativesNumberList.add(num);
+        	}
+        }
         
-        // sort the list
-		Collections.sort(lList);
+//         sort the lists
+		Collections.sort(positivesNumberList);
+		Collections.sort(negativesNumberList);
 		
 		// result structure
 		List<String> result = new ArrayList<String>();
-
-		// if the next element is consecutive, then
+		
+		
 		String oldString = "";
 		String newString = "";
-		for(int i = 0; i < lList.size(); i++) {
+		//negative numbers
+		for(int i = 0; i < negativesNumberList.size(); i++) {
 			// use an iterator maybe?
 			// write start to result set
-			result.add(lList.get(i).toString());
-			for(int j = i+1; j < lList.size(); j++) {
-				if (lList.get(i)+1 == lList.get(j)){
+			result.add(negativesNumberList.get(i).toString());
+			for(int j = i+1; j < negativesNumberList.size(); j++) {
+				if (negativesNumberList.get(i)+1 == negativesNumberList.get(j)){
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
 					oldString = result.get(result.size()-1);
 					// if the old string was a range already
-					if (oldString.contains("-")){
+					if (oldString.contains("--")){
 						// then get the upper limit
-						newString = oldString.split("-")[0]+"-"+lList.get(j);
+						newString = oldString.split("--")[0] + "-" + negativesNumberList.get(j);
 					}
 					else {
 						// then make it a range
-						newString = oldString + "-" + lList.get(j);
+						newString = oldString + "-" + negativesNumberList.get(j);
 					}
 					result.set(result.size()-1,  newString);
 					// now increment for the next pair
@@ -116,8 +134,43 @@ public class Demo implements NumberRangeSummarizer {
 						
 			}
 		}
-//		System.out.println(result);̣̣
-//		System.out.println("Done");
+		
+		//positive numbers
+		// if the next element is consecutive, then
+		oldString = "";
+		newString = "";
+		for(int i = 0; i < positivesNumberList.size(); i++) {
+			// use an iterator maybe?
+			// write start to result set
+			result.add(positivesNumberList.get(i).toString());
+			for(int j = i+1; j < positivesNumberList.size(); j++) {
+				if (positivesNumberList.get(i)+1 == positivesNumberList.get(j)){
+					// great
+					// extend the range of the last element in the result set
+					// get the last element
+					oldString = result.get(result.size()-1);
+					// if the old string was a range already
+					if (oldString.contains("-")){
+						// then get the upper limit
+						newString = oldString.split("-")[0]+"-"+positivesNumberList.get(j);
+					}
+					else {
+						// then make it a range
+						newString = oldString + "-" + positivesNumberList.get(j);
+					}
+					result.set(result.size()-1,  newString);
+					// now increment for the next pair
+					i = j;	
+				}
+				else {
+					i = j-1;
+					break;
+				}
+						
+			}
+		}
+		System.out.println(result);
+		//		System.out.println("Done");
 		return null;
 	}
 
@@ -127,7 +180,7 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("1,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
+		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
 		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}

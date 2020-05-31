@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 class DemoTest {
 
+	// tests for collect method
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
 	 */
@@ -39,4 +40,7 @@ class DemoTest {
 		Collection<Integer> actual = demo.collect(input);
 		assertEquals(expected, actual);
 	}
+	
+	//tests for summarizeCollection method
+	
 }
