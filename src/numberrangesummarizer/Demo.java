@@ -5,10 +5,8 @@ package numberrangesummarizer;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
-//import java.util.Arrays;
 
 /**
  * @author Sach
@@ -85,7 +83,7 @@ public class Demo implements NumberRangeSummarizer {
 		{
         	// add it to the list to be sorted
         	// (you can use a lambda expression here)
-        	if (num > 0) {
+        	if (num >= 0) {
         		positivesNumberList.add(num);
         	}
         	else if(num < 0) {
@@ -179,7 +177,7 @@ public class Demo implements NumberRangeSummarizer {
 		//trim last comma
 		string_result = string_result.substring(0, string_result.length()-2);
 		
-//		System.out.println(string_result);
+		System.out.println(string_result);
 		return string_result;
 	}
 
@@ -189,7 +187,7 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
+		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,0,1,6,7,8,12,13,14,15,21,22,23,24,31");
 		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}
