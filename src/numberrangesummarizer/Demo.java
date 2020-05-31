@@ -36,17 +36,17 @@ public class Demo implements NumberRangeSummarizer {
 			
 			// check type
 			// if we can convert to integer, then convert to integer
-//			Integer tempInt =  Integer.valueOf(0);
-//			try {
-//				// convert to int
-//				tempInt = Integer.valueOf(temp[i]);
-//			}
-//			catch(NumberFormatException ex){
-//				System.out.println("Invalid Input");
-//				System.exit(0);
-//			}						
+			Integer tempInt =  Integer.valueOf(0);
+			try {
+				// convert to int
+				tempInt = Integer.valueOf(temp[i]);
+			}
+			catch(NumberFormatException ex){
+				System.out.println("Invalid Input");
+				System.exit(0);
+			}						
 						
-			Integer tempInt = Integer.valueOf(temp[i]);
+//			Integer tempInt = Integer.valueOf(temp[i]);
 			// add to the output collection
 			
 			// check for duplicates
@@ -116,8 +116,8 @@ public class Demo implements NumberRangeSummarizer {
 						
 			}
 		}
-		System.out.println(result);
-		System.out.println("Done");
+//		System.out.println(result);̣̣
+//		System.out.println("Done");
 		return null;
 	}
 
@@ -125,10 +125,11 @@ public class Demo implements NumberRangeSummarizer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		NumberRangeSummarizer obj = new Demo();
+		Collection<Integer> input = obj.collect("1,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
+		obj.summarizeCollection(input);
 		System.out.println("Done");
-//		NumberRangeSummarizer obj = new Demo();
-//		Collection<Integer> input = obj.collect("1,2,3,6,7,8,12,13,14,15,21,22,23,24,31");
-//		obj.summarizeCollection(input);
 	}
 
 }
