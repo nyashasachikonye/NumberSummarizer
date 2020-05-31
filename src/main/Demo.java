@@ -23,19 +23,25 @@ public class Demo implements NumberRangeSummarizer {
 		 * FUTURE FEATURE: easily change the delimiter
 		 **/
 		
-		// initialise/declare/instantiate output datastructure
+		// initialise/declare/instantiate output data structure
 		// used ArrayList but we wouldnt be expecting any further values right?
 		Collection<Integer> result = new ArrayList<Integer>();
 	
 		
 		// spilt the input based on the delimiter ","
 		String [] temp = input.split(",");
-		// convert all the elements of the array to int values
+		// convert all the elements of the array to Integer values
 		/** REMEMBER, these can also be floats etc **/
 		for(int i = 0; i < temp.length; i++) {
 			// convert to int
 			Integer tempInt = Integer.valueOf(temp[i]);
 			// add to the output collection
+			
+			// check for duplicates
+			if (result.contains(tempInt)){
+				continue;
+			}
+			
 			result.add(tempInt);
 //			System.out.println(Arrays.toString(result.toArray()));
 		}
