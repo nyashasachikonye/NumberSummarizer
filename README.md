@@ -16,6 +16,14 @@ numbers and zero)
 * decimal numbers (positive decimals, negative decimals)
 * or any combination of these
 
+* Features
+- comes complete with tests
+
+* Limitations
+- Max Size of Input
+
+* Example
+- show gif
 
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
