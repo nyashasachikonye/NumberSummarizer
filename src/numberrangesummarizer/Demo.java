@@ -6,6 +6,7 @@ package numberrangesummarizer;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 
 /**
@@ -13,9 +14,31 @@ import java.util.ArrayList;
  *
  */
 public class Demo implements NumberRangeSummarizer {
+	
+	/**
+	Let’s break down this regex and see how it works:
+	* > -? – this part identifies if the given number is negative,
+	*  the dash “–” searches for dash literally 
+	*  and the question mark “?” marks its presence as an optional one
+	* > \d+ – this searches for one or more digits
+	* > (\.\d+)? – this part of regex is to identify float numbers.
+	* Here we're searching for one or more digits followed by a period. 
+	* > The question mark, at the end, signifies that this complete group is optional
+	**/
+	
+	//TODO(@sach): split this regex up into mulitple commented strings
+	private Pattern p = Pattern.compile("[^-?\\d+(\\.\\d+)?,]");
+	
+	// TODO(@sach): utilize this method and combine the other regexes 
+//	public boolean isNumeric(String strNum) {
+//	    if (strNum == null) {
+//	        return false; 
+//	    }
+//	    return pattern.matcher(strNum).matches();
+//	}
 
 	/**
-	 * collect method explanantino
+	 * collect method explanation
 	 * returns
 	 */
 	@Override
@@ -29,6 +52,43 @@ public class Demo implements NumberRangeSummarizer {
 		// used ArrayList but we wouldnt be expecting any further values right?
 		Collection<Integer> result = new ArrayList<Integer>();
 	
+		// input sanitisation
+		
+		// check that the input is not null (untested)
+		if (input == null) {
+			System.out.println("Invalid Input: null input");
+			System.exit(0);
+		}
+		
+		// check that the string is not blank (untested)
+		if (input.isBlank()) {
+			System.out.println("Invalid Input: blank input");
+			System.exit(0);
+		}
+		
+		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
+		
+		// remove all white spaces (trailing, leading, in-between)
+		input = input.replaceAll("\\s","");
+		
+		// removes any non digit from string
+		input = input.replaceAll(p.pattern(), "");
+		
+		// removes any hanging commas (in the middle)
+		input = input.replaceAll(",,+", ",");
+		
+		// remove leading hanging comma
+		// TODO(@sach): use regex
+		if (input.startsWith(",")) {
+			input = input.substring(1);
+		}
+		
+		// remove leading hanging comma
+		//TODO(@sach): use regex
+		if (input.endsWith(",")) {
+			input = input.substring(0, input.length());
+		}
+		
 		
 		// spilt the input based on the delimiter ","
 		String [] temp = input.split(",");
@@ -48,9 +108,6 @@ public class Demo implements NumberRangeSummarizer {
 				System.exit(0);
 			}						
 						
-//			Integer tempInt = Integer.valueOf(temp[i]);
-			// add to the output collection
-			
 			// check for duplicates
 			if (result.contains(tempInt)){
 				continue;
@@ -115,6 +172,7 @@ public class Demo implements NumberRangeSummarizer {
 					// if the old string was a range already
 					if (oldString.contains("--")){
 						// then get the upper limit
+						// use substring rather
 						newString = oldString.split("--")[0] + "-" + negativesNumberList.get(j);
 					}
 					else {
@@ -150,6 +208,7 @@ public class Demo implements NumberRangeSummarizer {
 					// if the old string was a range already
 					if (oldString.contains("-")){
 						// then get the upper limit
+						// use substring rather
 						newString = oldString.split("-")[0]+"-"+positivesNumberList.get(j);
 					}
 					else {
@@ -174,7 +233,8 @@ public class Demo implements NumberRangeSummarizer {
 			string_result = string_result + num_range + ", ";
 		};
 		
-		//trim last comma
+		// trim last comma
+		// use regex for this
 		string_result = string_result.substring(0, string_result.length()-2);
 		
 		System.out.println(string_result);
@@ -187,7 +247,9 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,0,1,6,7,8,12,13,14,15,21,22,23,24,31");
+		Collection<Integer> input = obj.collect("&, !, $, 32, 26, 42, &, !, *, %, 7, 8, 33, 25, 19, 24, 44, 49,"
+				+ " 21, 31, 37, 50, 35, 6, 28, 47, 34, 27, 17, 12, 1, 41, 23, 46, 30, 2, 9,"
+				+ " 18, 20, 40, 36, 48, 5, 15, 4, 39, 43, 13, 14, 10, 11, 45, 3, 38, 16, 22, 29");
 		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}

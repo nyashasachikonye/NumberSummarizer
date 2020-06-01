@@ -26,7 +26,7 @@ class NumberRangeTest {
 	 */
 	@Test
 	void testToString() {
-		NumberRange num_range = new NumberRange(new Integer("3"),new Integer("6"));
+		NumberRange num_range = new NumberRange(Integer.valueOf(3),Integer.valueOf(6));
 		String expected = "3-6";
 		String actual = num_range.toString();
 		assertEquals(expected, actual);
