@@ -77,6 +77,7 @@ public class Demo implements NumberRangeSummarizer {
 		input = input.replaceAll(p.pattern(), "");
 		
 		// removes any escape characters from the string
+// TODO(@sach): negative numbers collection test failing
 		input = input.replaceAll("[\\(\\)\\+\\-]", "");
 		
 		// removes any hanging commas (in the middle)
@@ -88,11 +89,12 @@ public class Demo implements NumberRangeSummarizer {
 			input = input.substring(1);
 		}
 		
-		// remove leading hanging comma
+		// remove trailing hanging comma
 		//TODO(@sach): use regex
 		if (input.endsWith(",")) {
 			input = input.substring(0, input.length());
 		}
+		
 		
 //		System.out.println("input string sanitized successfully");
 //		FUTURE FEATURE: let the developer know the difference in the strings, what was taken out,
@@ -102,7 +104,6 @@ public class Demo implements NumberRangeSummarizer {
 		// convert all the elements of the array to Integer values
 		/** REMEMBER, these can also be floats etc **/
 		for(String num : split_input) {
-			
 			// check type
 			// if we can convert to integer, then convert to integer
 			Integer tempInt =  Integer.valueOf(0);
@@ -207,9 +208,9 @@ public class Demo implements NumberRangeSummarizer {
 		for(int i = 0; i < positivesNumberList.size(); i++) {
 			// use an iterator maybe?
 			// write start to result set
-			result.add(positivesNumberList.get(i).toString());
+			result.add(Integer.toString(positivesNumberList.get(i)));
 			for(int j = i+1; j < positivesNumberList.size(); j++) {
-				if ((positivesNumberList.get(j)).equals(positivesNumberList.get(i)+1)){
+				if (positivesNumberList.get(j) ==  positivesNumberList.get(i)+1){
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
