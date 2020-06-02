@@ -55,17 +55,17 @@ public class Demo implements NumberRangeSummarizer {
 	
 		// input sanitisation
 		
-		// check that the input is not null (untested)
+		// check that the input is not null
 		if (input == null) {
 //			@TODO(@sach): change == to .equals
 			System.out.println("Invalid Input: null input");
-			System.exit(0); // fix these panics
+//			System.exit(0); // fix these panics
 		}
 		
 		// check that the string is not blank (untested)
 		if (input.isBlank()) {
 			System.out.println("Invalid Input: blank input");
-			System.exit(0); // fix these panics
+//			System.exit(0); // fix these panics
 		}
 		
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
@@ -75,6 +75,9 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// removes any non digit from string
 		input = input.replaceAll(p.pattern(), "");
+		
+		// removes any escape characters from the string
+		input = input.replaceAll("[\\(\\)\\+\\-]", "");
 		
 		// removes any hanging commas (in the middle)
 		input = input.replaceAll(",,+", ",");
@@ -92,23 +95,24 @@ public class Demo implements NumberRangeSummarizer {
 		}
 		
 //		System.out.println("input string sanitized successfully");
-		// FUTURE FEATURE: let the developer know the difference in the strings, what was taken out,
-		
+//		FUTURE FEATURE: let the developer know the difference in the strings, what was taken out,
 		
 		// spilt the input based on the delimiter ","
-		String [] temp = input.split(",");
+		String [] split_input = input.split(",");
 		// convert all the elements of the array to Integer values
 		/** REMEMBER, these can also be floats etc **/
-		for(int i = 0; i < temp.length; i++) {
+		for(String num : split_input) {
 			
 			// check type
 			// if we can convert to integer, then convert to integer
 			Integer tempInt =  Integer.valueOf(0);
 			try {
 				// convert to int
-				tempInt = Integer.valueOf(temp[i]);
+				tempInt = Integer.valueOf(num);
 			}
 			catch(NumberFormatException ex){
+				// chain catches?
+				// final catch! if anything slipped through sanitisation
 				System.out.println("Invalid Input");
 				System.exit(0); // fix these panics
 			}						
@@ -121,7 +125,7 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(tempInt);
 //			System.out.println(Arrays.toString(result.toArray()));
 		}
-//		System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
 
@@ -133,7 +137,6 @@ public class Demo implements NumberRangeSummarizer {
 	public String summarizeCollection(Collection<Integer> input) {
 		
 		// sort the collection
-		
 		// create a sorted list
 		List<Integer> negativesNumberList = new ArrayList<>();
 		
@@ -282,7 +285,6 @@ public class Demo implements NumberRangeSummarizer {
 		}
 		
 //		System.out.println(result);
-		//		System.out.println("Done");
 		String string_result = "";
 		for(String num_range : result) {
 			string_result = string_result + num_range + ", ";
@@ -302,7 +304,9 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("-3, -2, -1, 0, 1, 2, 3");
+		Collection<Integer> input = obj.collect("&,*,1,2,{,|,3,\\,6,\n,7,@,8,12,-,13,$,14,15,+, 21,22,),23,24,31");
+//		"&,*,1,2,{,|,3,\\,6,\n,7,@,8,--s-12E8-13,$,14,15,+, 21,22,),23,24,31"
+//		Collection<Integer> input = obj.collect(null);
 		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}

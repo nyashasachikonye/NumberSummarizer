@@ -33,10 +33,36 @@ class DemoTest {
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
-	void testCollectNegativeNumbers() {
+	void testCollectNegativeNumbersInput() {
 		Demo demo = new Demo();
 		Collection<Integer> expected = Arrays.asList(-1, -2, -3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String input = "-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31";
+		Collection<Integer> actual = demo.collect(input);
+		assertEquals(expected, actual);
+	}
+	
+//		TODO(@sach): implement this test
+//		/**
+//		 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+//		 * null input test
+//		 */
+//		@Test
+//		void testCollectNullInput() {
+//			Demo demo = new Demo();
+//			String input = null;
+//			Collection<Integer> actual = demo.collect(input);
+//			assertEquals("Invalid Input: null input", actual);
+//		}
+	
+	/**
+	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * non digit test
+	 */
+	@Test
+	void testCollectNonNumericInput() {
+		Demo demo = new Demo();
+		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
+		String input = "&,*, 1,2,3,6,7,),@,8,12,13,14,15,21,22,23,24,31,+";
 		Collection<Integer> actual = demo.collect(input);
 		assertEquals(expected, actual);
 	}
@@ -131,6 +157,7 @@ class DemoTest {
 	
 	
 	// disparate ranges positive and negative test
+//	TODO(@sach): implement this test
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 * //		You requested 10 sets with 100 unique random integers in each, taken from the [-1000564,3456743] range. 
@@ -165,6 +192,7 @@ class DemoTest {
 //	}
 	
 	// discontinuity test
+//	TODO(@sach): implement this test
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */	
@@ -177,7 +205,5 @@ class DemoTest {
 //		assertEquals(expected, actual);
 //	}
 	
-	// TODO(@sach): test for non digit characters
-	// TODO(@sach): test for blank input
-	// TODO(@sach): test for null input 
+	// TODO(@sach): implement test for non digit characters
 }
