@@ -110,7 +110,7 @@ public class Demo implements NumberRangeSummarizer {
 			}
 			catch(NumberFormatException ex){
 				System.out.println("Invalid Input");
-				System.exit(0);
+				System.exit(0); // fix these panics
 			}						
 						
 			// check for duplicates
@@ -169,8 +169,7 @@ public class Demo implements NumberRangeSummarizer {
 			// write start to result set
 			result.add(negativesNumberList.get(i).toString());
 			for(int j = i+1; j < negativesNumberList.size(); j++) {
-				if (negativesNumberList.get(i)+1 == negativesNumberList.get(j)){
-//					@TODO(@sach): change == to .equals
+				if ((negativesNumberList.get(j)).equals((negativesNumberList.get(i)+1))){
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
@@ -180,6 +179,7 @@ public class Demo implements NumberRangeSummarizer {
 						// then get the upper limit
 						// use substring rather
 						newString = oldString.split("--")[0] + "-" + negativesNumberList.get(j);
+//						(-3--2) -> (-3--1)
 						//TODO(@sach): change to use .replace
 					}
 					else {
@@ -206,8 +206,7 @@ public class Demo implements NumberRangeSummarizer {
 			// write start to result set
 			result.add(positivesNumberList.get(i).toString());
 			for(int j = i+1; j < positivesNumberList.size(); j++) {
-				if (positivesNumberList.get(i)+1 == positivesNumberList.get(j)){
-//					@TODO(@sach): change == to .equals
+				if ((positivesNumberList.get(j)).equals(positivesNumberList.get(i)+1)){
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
