@@ -213,7 +213,6 @@ public class Demo implements NumberRangeSummarizer {
 			     }
 			   }
 			  }
-//				System.out.println(result);
 				String string_result = "";
 				for(String num_range : result) {
 					string_result = string_result + num_range + ", ";
