@@ -7,6 +7,24 @@ package numberrangesummarizer;
  * @author Sach
  *
  */
+
+//NummberRange = {{ start , end }}
+//
+//"{1,1}, {3,3}, {6,8}, 12-15, 21-24, 31";
+//
+//toString : start = 12, end = 15 -> "12-15"
+//
+//NUmberRange[] = result
+//
+//calss NUmberRangeSUmmary{
+//	
+//	NumberRange[] reusult
+//	
+//	toString
+//}
+//
+//System.out.print(result)
+
 public class NumberRange {
 	
 	Integer start;

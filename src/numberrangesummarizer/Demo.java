@@ -37,6 +37,21 @@ public class Demo implements NumberRangeSummarizer {
 //	    }
 //	    return pattern.matcher(strNum).matches();
 //	}
+	
+//	TODO(@sach): implement me
+	public boolean sanitize() {
+//		use methods:
+//			isNumeric
+//			isEscapeCharacter
+ 		try {
+ 			// add sanitisation logic here
+ 		}
+ 		catch(Exception e){
+ 			return false;
+ 		}
+ 		return false;
+ 		
+	}
 
 	/**
 	 * collect method explanation
@@ -70,6 +85,8 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
 		
+		//TODO(@sach): remove decimal
+		
 		// remove all white spaces (trailing, leading, in-between)
 		input = input.replaceAll("\\s","");
 		
@@ -78,7 +95,7 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// removes any escape characters from the string
 // TODO(@sach): negative numbers collection test failing
-		input = input.replaceAll("[\\(\\)\\+\\-]", "");
+//		input = input.replaceAll("[\\(\\)\\+\\-]", "");
 		
 		// removes any hanging commas (in the middle)
 		input = input.replaceAll(",,+", ",");
@@ -129,6 +146,38 @@ public class Demo implements NumberRangeSummarizer {
 		System.out.println(result);
 		return result;
 	}
+	
+	public static ArrayList<String> tasieFunction(ArrayList<Integer> arr) {
+		// convert input to arr
+		
+		ArrayList<String> result = new ArrayList<>();
+		for (int i = 0; i < arr.size(); i++) {
+		  Integer j = arr.get(i);
+
+		  if (i == arr.size()-1){
+		    result.add(Integer.toString(j));
+		  }
+
+		  if (j+1 != arr.get(i + 1)) {
+			  result.add(Integer.toString(j));
+		  } else {
+		    Integer last = 0;
+		    for (int z=i+1; z < arr.size(); z++) {
+		      if (z+1 < arr.size() && (z+1 == arr.get(z + 1))) {
+		        continue;
+		      } else {
+		        last = arr.get(z);
+		        result.add(String.format("%s-%s", j, last));
+		        i = z + 1;
+		      }
+		      last = arr.get(arr.size() - 1);
+		      result.add(String.format("%s-%s", j, last));
+		      i = arr.size();
+		    }
+		  }
+		}
+		return result;
+	}
 
 	/**
 	 * summarizeCollection method explanation
@@ -162,6 +211,7 @@ public class Demo implements NumberRangeSummarizer {
 		Collections.sort(negativesNumberList);
 		
 		// result structure
+		// dangerous
 		List<String> result = new ArrayList<String>();
 		
 		
@@ -201,6 +251,8 @@ public class Demo implements NumberRangeSummarizer {
 			}
 		}
 		
+//		NEGATIVE NUMBERS [-2,-1]                      ||||                    POSITIVE NUMBERS [0,1,2]
+		
 		//positive numbers
 		// if the next element is consecutive, then
 		oldString = "";
@@ -208,6 +260,7 @@ public class Demo implements NumberRangeSummarizer {
 		for(int i = 0; i < positivesNumberList.size(); i++) {
 			// use an iterator maybe?
 			// write start to result set
+			// [1, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31]
 			result.add(Integer.toString(positivesNumberList.get(i)));
 			for(int j = i+1; j < positivesNumberList.size(); j++) {
 				if (positivesNumberList.get(j) ==  positivesNumberList.get(i)+1){
@@ -295,7 +348,7 @@ public class Demo implements NumberRangeSummarizer {
 		// use regex for this
 		string_result = string_result.substring(0, string_result.length()-2);
 		
-//		System.out.println(string_result);
+		System.out.println(string_result);
 		return string_result;
 	}
 
@@ -305,10 +358,13 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		Collection<Integer> input = obj.collect("&,*,1,2,{,|,3,\\,6,\n,7,@,8,12,-,13,$,14,15,+, 21,22,),23,24,31");
+		//		Collection<Integer> input = obj.collect("&,*,1,2,{,|,3,\\,6,\n,7,@,8,12,-,13,$,14,15,+, 21,22,),23,24,31");
+		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
+		System.out.println(tasieFunction(new ArrayList<>(input)));
+		// -2-2
 //		"&,*,1,2,{,|,3,\\,6,\n,7,@,8,--s-12E8-13,$,14,15,+, 21,22,),23,24,31"
 //		Collection<Integer> input = obj.collect(null);
-		obj.summarizeCollection(input);
+//		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}
 
