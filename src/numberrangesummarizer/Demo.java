@@ -135,7 +135,7 @@ public class Demo implements NumberRangeSummarizer {
 				System.exit(0); // fix these panics
 			}						
 						
-			// check for duplicates
+			// remove duplicates
 			if (result.contains(tempInt)){
 				continue;
 			}
@@ -143,41 +143,37 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(tempInt);
 //			System.out.println(Arrays.toString(result.toArray()));
 		}
-		System.out.println(result);
+//		System.out.println(result);
 		return result;
 	}
 	
-	public static ArrayList<String> tasieFunction(ArrayList<Integer> arr) {
-		// convert input to arr
-		
-		ArrayList<String> result = new ArrayList<>();
-		for (int i = 0; i < arr.size(); i++) {
-		  Integer j = arr.get(i);
-
-		  if (i == arr.size()-1){
-		    result.add(Integer.toString(j));
+	  public static ArrayList<String> tasieFunction(ArrayList<Integer> arr) {
+		  ArrayList<String> result = new ArrayList<>();
+		  for (int i = 0; i < arr.size(); i++) {
+		   Integer j = arr.get(i);
+		   
+		   if (i == arr.size()-1){
+		     result.add(Integer.toString(j));
+		   }
+		 
+		   if ((i + 1 < arr.size()) && (j+1 != arr.get(i + 1))) {
+		   result.add(Integer.toString(j));
+		   } else {
+		     Integer last = 0;
+		     for (int z = i+1; z < arr.size(); z++) {
+		       if (z+1 < arr.size() && (arr.get(z)+1 == arr.get(z + 1))) {
+		         continue;
+		       } else {
+		         last = arr.get(z);
+		         result.add(String.format("%s-%s", j, last));
+		         i = z ;
+		         z = arr.size();
+		       }
+		     }
+		   }
 		  }
-
-		  if (j+1 != arr.get(i + 1)) {
-			  result.add(Integer.toString(j));
-		  } else {
-		    Integer last = 0;
-		    for (int z=i+1; z < arr.size(); z++) {
-		      if (z+1 < arr.size() && (z+1 == arr.get(z + 1))) {
-		        continue;
-		      } else {
-		        last = arr.get(z);
-		        result.add(String.format("%s-%s", j, last));
-		        i = z + 1;
-		      }
-		      last = arr.get(arr.size() - 1);
-		      result.add(String.format("%s-%s", j, last));
-		      i = arr.size();
-		    }
-		  }
+		  return result;
 		}
-		return result;
-	}
 
 	/**
 	 * summarizeCollection method explanation
@@ -185,6 +181,53 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	@Override
 	public String summarizeCollection(Collection<Integer> input) {
+
+		Boolean isTasie = true;
+		
+		if (isTasie) {
+			System.out.println("Tasie");
+			ArrayList<Integer> arr = new ArrayList<>(input);
+			Collections.sort(arr);
+			
+			ArrayList<String> result = new ArrayList<>();
+			  for (int i = 0; i < arr.size(); i++) {
+			   Integer j = arr.get(i);
+			   
+			   if (i == arr.size()-1){
+			     result.add(Integer.toString(j));
+			   }
+			 
+			   if ((i + 1 < arr.size()) && (j+1 != arr.get(i + 1))) {
+			   result.add(Integer.toString(j));
+			   } else {
+			     Integer last = 0;
+			     for (int z = i+1; z < arr.size(); z++) {
+			       if (z+1 < arr.size() && (arr.get(z)+1 == arr.get(z + 1))) {
+			         continue;
+			       } else {
+			         last = arr.get(z);
+			         result.add(String.format("%s-%s", j, last));
+			         i = z ;
+			         z = arr.size();
+			       }
+			     }
+			   }
+			  }
+//				System.out.println(result);
+				String string_result = "";
+				for(String num_range : result) {
+					string_result = string_result + num_range + ", ";
+				};
+				
+				// trim last comma
+				// use regex for this
+				string_result = string_result.substring(0, string_result.length()-2);
+				
+//				System.out.println(string_result);
+				return string_result;
+		}
+		else {
+			System.out.println("Sach");
 		
 		// sort the collection
 		// create a sorted list
@@ -350,6 +393,7 @@ public class Demo implements NumberRangeSummarizer {
 		
 		System.out.println(string_result);
 		return string_result;
+		}
 	}
 
 	/**
@@ -357,11 +401,10 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	public static void main(String[] args) {
 		
-		NumberRangeSummarizer obj = new Demo();
+//		NumberRangeSummarizer obj = new Demo();
 		//		Collection<Integer> input = obj.collect("&,*,1,2,{,|,3,\\,6,\n,7,@,8,12,-,13,$,14,15,+, 21,22,),23,24,31");
-		Collection<Integer> input = obj.collect("-8,-4,-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31");
-		System.out.println(tasieFunction(new ArrayList<>(input)));
-		// -2-2
+//		Collection<Integer> input = obj.collect("-8,-4,-3,-2,-1,0,1,6,7,8,12,13,14,15,21,22,23,24,31");
+//		Collection<Integer> input = obj.collect("6,7,8,12,13,14,15,21,22,23,24,31");
 //		"&,*,1,2,{,|,3,\\,6,\n,7,@,8,--s-12E8-13,$,14,15,+, 21,22,),23,24,31"
 //		Collection<Integer> input = obj.collect(null);
 //		obj.summarizeCollection(input);
