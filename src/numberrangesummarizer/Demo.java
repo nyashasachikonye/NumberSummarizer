@@ -32,6 +32,7 @@ public class Demo implements NumberRangeSummarizer {
 	// TODO(@sach): utilize this method and combine the other regexes 
 //	public boolean isNumeric(String strNum) {
 //	    if (strNum == null) {
+//		@TODO(@sach): change == to .equals
 //	        return false; 
 //	    }
 //	    return pattern.matcher(strNum).matches();
@@ -56,14 +57,15 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// check that the input is not null (untested)
 		if (input == null) {
+//			@TODO(@sach): change == to .equals
 			System.out.println("Invalid Input: null input");
-			System.exit(0);
+			System.exit(0); // fix these panics
 		}
 		
 		// check that the string is not blank (untested)
 		if (input.isBlank()) {
 			System.out.println("Invalid Input: blank input");
-			System.exit(0);
+			System.exit(0); // fix these panics
 		}
 		
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
@@ -168,6 +170,7 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(negativesNumberList.get(i).toString());
 			for(int j = i+1; j < negativesNumberList.size(); j++) {
 				if (negativesNumberList.get(i)+1 == negativesNumberList.get(j)){
+//					@TODO(@sach): change == to .equals
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
@@ -177,6 +180,7 @@ public class Demo implements NumberRangeSummarizer {
 						// then get the upper limit
 						// use substring rather
 						newString = oldString.split("--")[0] + "-" + negativesNumberList.get(j);
+						//TODO(@sach): change to use .replace
 					}
 					else {
 						// then make it a range
@@ -203,23 +207,72 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(positivesNumberList.get(i).toString());
 			for(int j = i+1; j < positivesNumberList.size(); j++) {
 				if (positivesNumberList.get(i)+1 == positivesNumberList.get(j)){
+//					@TODO(@sach): change == to .equals
 					// great
 					// extend the range of the last element in the result set
 					// get the last element
 					oldString = result.get(result.size()-1);
-					// if the old string was a range already
-					if (oldString.contains("-")){
-						// then get the upper limit
-						// use substring rather
-						newString = oldString.split("-")[0]+"-"+positivesNumberList.get(j);
-					}
-					else {
-						// then make it a range
-						newString = oldString + "-" + positivesNumberList.get(j);
-					}
-					result.set(result.size()-1,  newString);
-					// now increment for the next pair
-					i = j;	
+					
+					// check the zero for neg-zero-pos discontinuity
+//					if(oldString.equals("0")) {
+//						System.out.println("zero detected");
+//						//check that the previous element didn't end in "-1"
+//						if ((result.get(result.size()-2).endsWith("--1"))){
+//							// it is a range
+//							newString = result.get(result.size()-2).replace("--1", "-"+positivesNumberList.get(j));
+//						}
+//						else {
+//							System.out.println();
+//						}
+//					}else {
+//						 if the old string was a range already
+						if (oldString.contains("-")){
+							// then get the upper limit
+							// use substring ratherInteger.valueOf(3)
+							newString = oldString.split("-")[0]+"-"+positivesNumberList.get(j);
+							//TODO(@sach): change to use .replace
+						}
+						else {
+							// then make it a range
+							newString = oldString + "-" + positivesNumberList.get(j);
+						}
+//						if((result.get(result.size()-1).startsWith("0"))){
+							// check the element before that ends with -1
+							// if there is an element before that (make this check)
+//							if (result.get(result.size()-2).endsWith("-1")){
+//								System.out.println("ends with muinus one");
+//								// if the element ends with minus one
+//								// we must join the number range
+//									// take the minus one number range
+//										// if its a range
+//								String former = result.get(result.size()-2);
+//										// remove the minus one
+//								former = former.split("--")[0];
+//									// get the latter
+//								String latter = result.get(result.size()-1);
+//										// remove the zero
+//								latter = latter.split("--")[0];
+//									// perform the join
+//								newString = former + "-" + latter;
+//								
+//								//pop the two from the result set
+//								result.remove(result.size()-1);
+//								result.remove(result.size()-1);
+//								
+//								// write the new result
+//								result.add(newString);
+//								i = j;
+//							}
+//							if (result.get(result.size()-1).endsWith("-1")){
+//								System.out.println("ends with -1");
+//							}
+//							System.out.println("starts with zero");
+//						} else 
+//						{
+						result.set(result.size()-1,  newString);
+						// now increment for the next pair
+						i = j;	
+//					}	
 				}
 				else {
 					i = j-1;
@@ -228,6 +281,7 @@ public class Demo implements NumberRangeSummarizer {
 						
 			}
 		}
+		
 //		System.out.println(result);
 		//		System.out.println("Done");
 		String string_result = "";
@@ -295,7 +349,7 @@ public class Demo implements NumberRangeSummarizer {
 //				+ " 2504077, 2543091, 2628840, 2672451, 2741584, 2762084, 2833291, 2878373, 2920252, 3007322,"
 //				+ " 3011794, 3024757, 3097013, 3128475, 3227265, 3260312, 3292663, 3360372, 3366320, 3388425,"
 //				+ " 3446047");
-		Collection<Integer> input = obj.collect("-3,-1,0,1,2,5,6,7");
+		Collection<Integer> input = obj.collect("-3, -2, -1, 0, 1, 2, 3");
 		obj.summarizeCollection(input);
 		System.out.println("Done");
 	}
