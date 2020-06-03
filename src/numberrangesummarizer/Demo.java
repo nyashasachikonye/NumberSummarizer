@@ -58,10 +58,7 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	@Override
 	public Collection<Integer> collect(String input) {
-		/**
-		 * ASSUMPTION: the values will be supplied as comma delimited numbers
-		 * FUTURE FEATURE: easily change the delimiter
-		 **/
+
 		
 		// initialise/declare/instantiate output data structure
 		// used ArrayList but we wouldnt be expecting any further values right?
@@ -84,7 +81,7 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
 		
-		//TODO(@sach): remove decimal
+		// TODO(@sach): remove decimal
 		
 //		input = input.replaceAll("\\D", "");
 //		System.exit(0);

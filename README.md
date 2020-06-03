@@ -13,8 +13,10 @@ consecutive numbers are combined into a range.
 the ibrary is able to summarise the following values:
 * integers (positve natural numbers, negative natural
 numbers and zero)
-* decimal numbers (positive decimals, negative decimals)
-* or any combination of these
+
+the library does not summarise the following values:
+* decimals
+* numbers expressed in scientific notation
 
 		/**
 		 * ASSUMPTION: the values will be supplied as comma delimited numbers
