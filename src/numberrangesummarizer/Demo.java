@@ -26,8 +26,10 @@ public class Demo implements NumberRangeSummarizer {
 	**/
 	
 	//TODO(@sach): split this regex up into mulitple commented strings
+	// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
 	
-	private Pattern include_regex = Pattern.compile("["
+	private Pattern include_regex = Pattern.compile(
+			"["
 			// regex components
 			+ "^" // include pattern that of the following: 
 			+ "-?" // negative numbers
@@ -37,6 +39,15 @@ public class Demo implements NumberRangeSummarizer {
 			+ "." // the comma as a decimal seperator
 			+ "]");
 	
+	private Pattern exclude_regex =  Pattern.compile(
+			"" // exclude patterns that are like the following
+			+ "(\\d+)\\.(\\d+)" // decimal numbers
+			+ "[\\s" // white spaces (trailing, leading, in-between)
+//			+ "\\d+\\s+?\\d+" // white spaces in-between digits
+
+			+ ",,+" // removes any hanging commas (in the middle)
+			+ "]");
+
 	// TODO(@sach): utilize this method and combine the other regexes 
 //	public boolean isNumeric(String strNum) {
 //	    if (strNum == null) {
@@ -47,10 +58,11 @@ public class Demo implements NumberRangeSummarizer {
 //	}
 	
 //	TODO(@sach): implement me
-	public boolean sanitize(String input) {
+	public boolean sanitize_(String input) {
 //		use methods:
 //			isNumeric
 //			isEscapeCharacter
+		// sort in a
  		try {
  			// add sanitisation logic here
  		}
@@ -58,6 +70,62 @@ public class Demo implements NumberRangeSummarizer {
  			return false;
  		}
  		return false;
+ 		
+	}
+	
+//	TODO(@sach): implement me
+	public String sanitize(String input) {
+//		use methods:
+//			isNumeric
+//			isEscapeCharacter
+		// sort in a
+ 		try {
+ 		// input sanitisation
+ 			
+ 			// check that the input is not null
+ 			if (input == null) {
+// 				TODO(@sach): change == to .equals
+ 				System.out.println("Invalid Input: null input");
+// 				System.exit(0); // fix these panics
+ 			}
+ 			
+ 		// check that the input is not null
+ 			if (input == null) {
+// 				TODO(@sach): change == to .equals
+ 				System.out.println("Invalid Input: null input");
+// 				System.exit(0); // fix these panics
+ 			}
+ 			
+ 		// removes any non digit from string
+ 			input = input.replaceAll(include_regex.pattern(), "");
+ 			
+ 			// removes any .. from string
+ 			// remove all white spaces (trailing, leading, in-between)
+// 			input = input.replaceAll("\\s","");
+ 			input = input.replaceAll(exclude_regex.pattern(), "");
+ 			
+ 			// removes any hanging commas (in the middle)
+ 			input = input.replaceAll(",,+", ",");
+ 			
+ 			// remove leading hanging comma
+ 			// TODO(@sach): use regex
+ 			if (input.startsWith(",")) {
+ 				input = input.substring(1);
+ 			}
+ 			
+ 			// remove trailing hanging comma
+ 			//TODO(@sach): use regex
+ 			if (input.endsWith(",")) {
+ 				input = input.substring(0, input.length());
+ 			}
+ 			
+ 			return input;
+ 			
+ 		}
+ 		catch(Exception e){
+ 			return null;
+ 		}
+ 		// something happened, shouldnt get here, address this 
  		
 	}
 
@@ -68,83 +136,27 @@ public class Demo implements NumberRangeSummarizer {
 	@Override
 	public Collection<Integer> collect(String input) {
 
-		
 		// initialise/declare/instantiate output data structure
 		// used ArrayList but we wouldnt be expecting any further values right?
 		Collection<Integer> result = new ArrayList<Integer>();
+		Integer tempInt =  Integer.valueOf(0);
 	
 		// input sanitisation
-		
-		// check that the input is not null
-		if (input == null) {
-//			TODO(@sach): change == to .equals
-			System.out.println("Invalid Input: null input");
-//			System.exit(0); // fix these panics
-		}
-		
-		// check that the string is not blank (untested)
-		if (input.isBlank()) {
-			System.out.println("Invalid Input: blank input");
-//			System.exit(0); // fix these panics
-		}
-		
-		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
-		
-//		input = input.replaceAll("\\D", "");
-//		System.exit(0);
-		
-		// remove all white spaces (trailing, leading, in-between)
-		input = input.replaceAll("\\s","");
-		
-		// removes any non digit from string
-		input = input.replaceAll(include_regex.pattern(), "");
-		
-		// removes any floats from the string
-//		 TODO(@sach) : remove any floats from the string
-		input = input.replaceAll("(\\d+)\\.(\\d+)", "");
-		
-		// removes any escape characters from the string
-// 		// TODO(@sach): negative numbers collection test failing
-//		input = input.replaceAll("[\\(\\)s\\+\\-]", "");
-		
-		// removes any hanging commas (in the middle)
-		input = input.replaceAll(",,+", ",");
-		
-		// remove leading hanging comma
-		// TODO(@sach): use regex
-		if (input.startsWith(",")) {
-			input = input.substring(1);
-		}
-		
-		// remove trailing hanging comma
-		//TODO(@sach): use regex
-		if (input.endsWith(",")) {
-			input = input.substring(0, input.length());
-		}
-		
-		
-//		System.out.println("input string sanitized successfully");
-//		FUTURE FEATURE: let the developer know the difference in the strings, what was taken out,
+		input = sanitize(input);
 		
 		// spilt the input based on the delimiter ","
 		String [] split_input = input.split(",");
 		// convert all the elements of the array to Integer values
-		/** REMEMBER, these can also be floats etc **/
 		for(String num : split_input) {
-			// check type
-			// if we can convert to integer, then convert to integer
-			Integer tempInt =  Integer.valueOf(0);
+			// convert to integer
 			try {
 				// convert to int
 				tempInt = Integer.valueOf(num);
 			}
 			catch(NumberFormatException ex){
-				// chain catches?
-				// final catch! if anything slipped through sanitisation
 				System.out.println("Invalid Input");
 				System.exit(0); // fix these panics
 			}						
-						
 			// remove duplicates
 			if (result.contains(tempInt)){
 				continue;
@@ -214,9 +226,10 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		String input = "-1,-2,-3,6,7,8,12.4,13,14,15,21,22,23,24,31";
+		String input = "-1,-2,-3,6,7,8,12.4,13,,,,14,15,21,22,23,24,31";
+		System.out.println(input);
 		Collection<Integer> actual = obj.collect(input);
-//		System.out.println(obj.summarizeCollection(actual));
+		System.out.println(obj.summarizeCollection(actual));
 		System.out.println("Done");
 	}
 

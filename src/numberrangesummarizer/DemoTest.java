@@ -79,6 +79,34 @@ class DemoTest {
 		Collection<Integer> actual = demo.collect(input);
 		assertEquals(expected, actual);
 	}
+
+	/**
+	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * non digit test
+	 */
+//	 TODO(@sach): implement test for non digit characters
+	@Test
+	void testCollectHangingCommaInput() {
+		Demo demo = new Demo();
+		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
+		String input = ",,,,1,2,3,6,7,8,12,,,13,14,15,21,22,23,24,31,";
+		Collection<Integer> actual = demo.collect(input);
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * non digit test
+	 */
+//	 TODO(@sach): implement test for white spaces between numbers
+//	@Test
+//	void testCollectWhiteSpacesInput() {
+//		Demo demo = new Demo();
+//		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13);
+//		String input = "1,2, 3,  6,7 ,8,12  ,13,1 4,1  5, 2 1 ,  2  2  ";
+//		Collection<Integer> actual = demo.collect(input);
+//		assertEquals(expected, actual);
+//	}
 	
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
