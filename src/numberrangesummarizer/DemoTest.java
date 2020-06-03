@@ -58,15 +58,15 @@ class DemoTest {
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
 	 * non digit test
 	 */
-	// TODO(@sach): implement test for non digit characters
-//	@Test
-//	void testCollectNonNumericInput() {
-//		Demo demo = new Demo();
-//		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
-//		String input = "&,*, 1,2,3,6,7,),@,8,12,13,14,15,21,22,23,24,31,+";
-//		Collection<Integer> actual = demo.collect(input);
-//		assertEquals(expected, actual);
-//	}
+//	 TODO(@sach): implement test for non digit characters
+	@Test
+	void testCollectNonNumericInput() {
+		Demo demo = new Demo();
+		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
+		String input = "&,*, 1,2,3,6,7,@,8,12,13,14,15,21,22,23,24,31";
+		Collection<Integer> actual = demo.collect(input);
+		assertEquals(expected, actual);
+	}
 	
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
