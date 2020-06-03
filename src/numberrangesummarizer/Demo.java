@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Sach
@@ -38,15 +39,6 @@ public class Demo implements NumberRangeSummarizer {
 			+ "," // the comma as a delimiter
 			+ "." // the comma as a decimal seperator
 			+ "]");
-	
-	private Pattern exclude_regex =  Pattern.compile(
-			"" // exclude patterns that are like the following
-			+ "(\\d+)\\.(\\d+)" // decimal numbers
-			+ "[\\s" // white spaces (trailing, leading, in-between)
-//			+ "\\d+\\s+?\\d+" // white spaces in-between digits
-
-			+ ",,+" // removes any hanging commas (in the middle)
-			+ "]");
 
 	// TODO(@sach): utilize this method and combine the other regexes 
 //	public boolean isNumeric(String strNum) {
@@ -57,78 +49,65 @@ public class Demo implements NumberRangeSummarizer {
 //	    return pattern.matcher(strNum).matches();
 //	}
 	
-//	TODO(@sach): implement me
-	public boolean sanitize_(String input) {
-//		use methods:
-//			isNumeric
-//			isEscapeCharacter
-		// sort in a
- 		try {
- 			// add sanitisation logic here
- 		}
- 		catch(Exception e){
- 			return false;
- 		}
- 		return false;
- 		
-	}
-	
-//	TODO(@sach): implement me
 	public String sanitize(String input) {
 		
-//		use methods:
-//			isNumeric
-//			isEscapeCharacter
-		// sort in a
- 		try {
- 		// input sanitisation
- 			
- 			// check that the input is not null
- 			if (input == null) {
-// 				TODO(@sach): change == to .equals
- 				System.out.println("Invalid Input: null input");
-// 				System.exit(0); // fix these panics
- 			}
- 			
- 		// check that the input is not null
- 			if (input == null) {
-// 				TODO(@sach): change == to .equals
- 				System.out.println("Invalid Input: null input");
-// 				System.exit(0); // fix these panics
- 			}
- 			
- 		// removes any non digit from string
- 			input = input.replaceAll(include_regex.pattern(), "");
- 			
- 			// removes any .. from string
- 			// remove all white spaces (trailing, leading, in-between)
-// 			input = input.replaceAll("\\s","");
- 			input = input.replaceAll(exclude_regex.pattern(), "");
- 			
- 			// removes any hanging commas (in the middle)
- 			input = input.replaceAll(",,+", ",");
- 			
- 			// remove leading hanging comma
- 			// TODO(@sach): use regex
- 			if (input.startsWith(",")) {
- 				input = input.substring(1);
- 			}
- 			
- 			// remove trailing hanging comma
- 			//TODO(@sach): use regex
- 			if (input.endsWith(",")) {
- 				input = input.substring(0, input.length());
- 			}
- 			
- 			return input;
- 			
- 		}
- 		catch(Exception e){
- 			return null;
- 		}
- 		// something happened, shouldnt get here, address this 
- 		
-	}
+		// check that the input is not null
+		if (input == null) {
+//			TODO(@sach): change == to .equals
+			System.out.println("Invalid Input: null input");
+//			System.exit(0); // fix these panics
+		}
+			
+		// check that the input is not null
+			if (input == null) {
+//				TODO(@sach): change == to .equals
+				System.out.println("Invalid Input: null input");
+//				System.exit(0); // fix these panics
+		}
+		
+		// removes any non digit from string
+		input = input.replaceAll(include_regex.pattern(), "");
+		
+		// removes any .. from string
+		// remove all white spaces (trailing, leading, in-between)
+//		input = input.replaceAll(exclude_regex.pattern(), "");
+		
+		// spilt the input based on the delimiter ","
+		String [] split_input = input.split(",");
+		
+		// create a result data structure
+		Collection<String> result = new ArrayList<String>();
+		// loop through the array and add each qualifying element to the resultant
+		for(String num : split_input) {
+			
+			// remove blank elements (" ")
+			if (num.isBlank()){
+				continue;
+			}
+			
+			// remove empty elements ("")
+			if (num.isEmpty()){
+				continue;
+			}
+			
+			// remove decimal elements (12.5)
+			if (num.contains(".")){
+				continue;
+			}
+			
+			// remove duplicates
+			if (result.contains(num)){
+				continue;
+			}
+			
+			result.add(num);
+		}
+		
+		Arrays.sort(result.toArray());
+		// remove added white-spaces and parenthesis
+		return result.toString().replaceAll("[\\[\\]\\s]", "");
+		
+		}
 
 	/**
 	 * collect method explanation
@@ -250,7 +229,7 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		String input = "-1,-2,-3,6,7,8,12.4,13,,,,14,15,21,22,23,24,31";
+		String input = "-1,-2,-3,6,7,8,12.4,1  3,14,15,21,22,23,24,31";
 		System.out.println(input);
 		Collection<Integer> actual = obj.collect(input);
 		System.out.println(obj.summarizeCollection(actual));
