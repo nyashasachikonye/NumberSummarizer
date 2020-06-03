@@ -93,8 +93,10 @@ public class Demo implements NumberRangeSummarizer {
 		input = input.replaceAll(p.pattern(), "");
 		
 		// removes any escape characters from the string
-// 		TODO(@sach): negative numbers collection test failing
+// 		// TODO(@sach): negative numbers collection test failing
 //		input = input.replaceAll("[\\(\\)\\+\\-]", "");
+		
+//		 TODO(@sach) : remove any floats from the string
 		
 		// removes any hanging commas (in the middle)
 		input = input.replaceAll(",,+", ",");
