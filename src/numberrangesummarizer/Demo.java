@@ -26,7 +26,16 @@ public class Demo implements NumberRangeSummarizer {
 	**/
 	
 	//TODO(@sach): split this regex up into mulitple commented strings
-	private Pattern p = Pattern.compile("[^-?\\d+(\\.\\d+)?,]");
+	
+	private Pattern include_regex = Pattern.compile("["
+			// regex components
+			+ "^" // include pattern that of the following: 
+			+ "-?" // negative numbers
+			+ "\\d+" // only digits
+//			+ "(\\.\\d+)?" // float numbers
+			+ "," // the comma as a delimiter
+			+ "." // the comma as a decimal seperator
+			+ "]");
 	
 	// TODO(@sach): utilize this method and combine the other regexes 
 //	public boolean isNumeric(String strNum) {
@@ -81,8 +90,6 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
 		
-		// TODO(@sach): remove decimal
-		
 //		input = input.replaceAll("\\D", "");
 //		System.exit(0);
 		
@@ -90,13 +97,15 @@ public class Demo implements NumberRangeSummarizer {
 		input = input.replaceAll("\\s","");
 		
 		// removes any non digit from string
-		input = input.replaceAll(p.pattern(), "");
+		input = input.replaceAll(include_regex.pattern(), "");
+		
+		// removes any floats from the string
+//		 TODO(@sach) : remove any floats from the string
+		input = input.replaceAll("(\\d+)\\.(\\d+)", "");
 		
 		// removes any escape characters from the string
 // 		// TODO(@sach): negative numbers collection test failing
-//		input = input.replaceAll("[\\(\\)\\+\\-]", "");
-		
-//		 TODO(@sach) : remove any floats from the string
+//		input = input.replaceAll("[\\(\\)s\\+\\-]", "");
 		
 		// removes any hanging commas (in the middle)
 		input = input.replaceAll(",,+", ",");
@@ -143,7 +152,7 @@ public class Demo implements NumberRangeSummarizer {
 			
 			result.add(tempInt);
 		}
-//		System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
 
@@ -205,9 +214,9 @@ public class Demo implements NumberRangeSummarizer {
 	public static void main(String[] args) {
 		
 		NumberRangeSummarizer obj = new Demo();
-		String input = "-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31";
+		String input = "-1,-2,-3,6,7,8,12.4,13,14,15,21,22,23,24,31";
 		Collection<Integer> actual = obj.collect(input);
-		System.out.println(obj.summarizeCollection(actual));
+//		System.out.println(obj.summarizeCollection(actual));
 		System.out.println("Done");
 	}
 
