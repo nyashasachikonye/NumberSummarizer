@@ -35,8 +35,8 @@ class DemoTest {
 	@Test
 	void testCollectNegativeNumbersInput() {
 		Demo demo = new Demo();
-		Collection<Integer> expected = Arrays.asList(-1, -2, -3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
-		String input = "-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31";
+		Collection<Integer> expected = Arrays.asList(-1, -2, -3, 6, 7);
+		String input = "-1,-2,-3,6,7";
 		Collection<Integer> actual = demo.collect(input);
 		assertEquals(expected, actual);
 	}
@@ -47,8 +47,8 @@ class DemoTest {
 	@Test
 	void testCollectDecimalNumbersInput() {
 		Demo demo = new Demo();
-		Collection<Integer> expected = Arrays.asList(-1, -2, -3, 6, 7, 8, 13, 14, 15, 21, 22, 23, 24, 31);
-		String input = "-1,-2,-3,6,7,8,12.4,13,14,15,21,22,23,24,31";
+		Collection<Integer> expected = Arrays.asList(-1, -2, 6, 7, 8);
+		String input = "-1,-2,-3.5,6,7,8,12.4";
 		Collection<Integer> actual = demo.collect(input);
 		assertEquals(expected, actual);
 	}
@@ -98,15 +98,14 @@ class DemoTest {
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
 	 * non digit test
 	 */
-//	 TODO(@sach): implement test for white spaces between numbers
-//	@Test
-//	void testCollectWhiteSpacesInput() {
-//		Demo demo = new Demo();
-//		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13);
-//		String input = "1,2, 3,  6,7 ,8,12  ,13,1 4,1  5, 2 1 ,  2  2  ";
-//		Collection<Integer> actual = demo.collect(input);
-//		assertEquals(expected, actual);
-//	}
+	@Test
+	void testCollectWhiteSpacesInput() {
+		Demo demo = new Demo();
+		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21 , 22);
+		String input = "1,2, 3,  6,7 ,8,12  ,13,1 4,1  5, 2 1 ,  2  2  ";
+		Collection<Integer> actual = demo.collect(input);
+		assertEquals(expected, actual);
+	}
 	
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
@@ -214,49 +213,33 @@ class DemoTest {
 //	TODO(@sach): implement this test
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
-	 * //		You requested 10 sets with 100 unique random integers in each, taken from the [-1000564,3456743] range. 
-//		The integers in each set were sorted in ascending order.
+	 * 1 set with 50 unique random integers, taken from the [-200,500] range. The integers were not sorted.
 	 */	
-//	@Test
-//	void testSummarizeCollectionDisparateMultiRangePositiveNegative() {
-//		Demo demo = new Demo();
-//		Collection<Integer> input = Arrays.asList(-975213, -908915, -872718, -856291, -808170, -732158, -702987,
-//				-638163, -620384, -615614, -615612, -615612 -607034, -568285, -562089, -438095, -360353, -162120, -141496,
-//				-134892, -125011, -124029, -63572, -19018, -12010, 5299, 46476, 216457, 234671, 289405,
-//				370842, 374166, 399542, 494808, 521707, 526530, 569355, 636369, 694565, 795456, 875310,
-//				913074, 980211, 1018193, 1078679, 1116271, 1120071, 1127752, 1133932, 1145205, 1153523,
-//				1183227, 1200483, 1203064, 1212825, 1224559, 1273210, 1298881, 1301589, 1411545, 1486057,
-//				1517465, 1538706, 1545415, 1626153, 1755210, 1930254, 1940198, 1992405, 2012340, 2050364,
-//				2082003, 2082742, 2091489, 2117993, 2159113, 2171572, 2205602, 2232525, 2270281, 2466219,
-//				2504077, 2543091, 2628840, 2672451, 2741584, 2762084, 2833291, 2878373, 2920252, 3007322,
-//				3011794, 3024757, 3097013, 3128475, 3227265, 3260312, 3292663, 3360372, 3366320, 3388425,
-//				3446047);
-//		String expected = "-975213, -908915, -872718, -856291, -808170, -732158, -702987, -638163, -620384,"
-//				+ " -615614--615612, -607034, -568285, -562089, -438095, -360353, -162120, -141496, -134892, -125011,"
-//				+ " -124029, -63572, -19018, -12010, 5299, 46476, 216457, 234671, 289405, 370842, 374166, 399542,"
-//				+ " 494808, 521707, 526530, 569355, 636369, 694565, 795456, 875310, 913074, 980211, 1018193,"
-//				+ " 1078679, 1116271, 1120071, 1127752, 1133932, 1145205, 1153523, 1183227, 1200483, 1203064,"
-//				+ " 1212825, 1224559, 1273210, 1298881, 1301589, 1411545, 1486057, 1517465, 1538706, 1545415,"
-//				+ " 1626153, 1755210, 1930254, 1940198, 1992405, 2012340, 2050364, 2082003, 2082742, 2091489,"
-//				+ " 2117993, 2159113, 2171572, 2205602, 2232525, 2270281, 2466219, 2504077, 2543091, 2628840,"
-//				+ " 2672451, 2741584, 2762084, 2833291, 2878373, 2920252, 3007322, 3011794, 3024757, 3097013,"
-//				+ " 3128475, 3227265, 3260312, 3292663, 3360372, 3366320, 3388425, 3446047";
-//		String actual = demo.summarizeCollection(input);
-//		assertEquals(expected, actual);
-//	}
+	@Test
+	void testSummarizeCollectionDisparateMultiRangePositiveNegative() {
+		Demo demo = new Demo();
+		Collection<Integer> input = Arrays.asList(63, 291, -93, 500, 7, -26, -77, 118, 76, 169, 192,
+				-188, 237, 9, 117, 310, 463, -59, 497, 133, -98, 484, 400, 135, 266, -24, -110, 91, 
+				-134, 470, 297, 141, 16, 5, -197, -162, 324, 406, 453, -104, -152, 153, 180, 235, 
+				432, -179, -105, 197, 272, 44, 283);
+		String expected = "-197, -188, -179, -162, -152, -134, -110, -105--104, -98, -93, -77, -59,"
+				+ " -26, -24, 5, 7, 9, 16, 44, 63, 76, 91, 117-118, 133, 135, 141, 153, 169, 180, 192,"
+				+ " 197, 235, 237, 266, 272, 283, 291, 297, 310, 324, 400, 406, 432, 453, 463, 470,"
+				+ " 484, 497, 500";
+		String actual = demo.summarizeCollection(input);
+		assertEquals(expected, actual);
+	}
 	
 	// discontinuity test
-//	TODO(@sach): implement this test
 	/**
 	 * Test method for {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */	
-//	@Test
-//	void testSummarizeCollectionDiscontinuityTest() {
-//		Demo demo = new Demo();
-//"-8,-4,-3,-2,-1,0,1,6,7,8,12,13,14,15,21,22,23,24,31"
-//		Collection<Integer> input = Arrays.asList(-3, -2, -1, 0, 1, 2, 3);
-//		String expected = "-3-3";
-//		String actual = demo.summarizeCollection(input);
-//		assertEquals(expected, actual);
-//	}
+	@Test
+	void testSummarizeCollectionDiscontinuityTest() {
+		Demo demo = new Demo();
+		Collection<Integer> input = Arrays.asList(-3, -2, -1, 0, 1, 2, 3);
+		String expected = "-3-3";
+		String actual = demo.summarizeCollection(input);
+		assertEquals(expected, actual);
+	}
 }

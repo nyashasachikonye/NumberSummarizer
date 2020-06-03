@@ -53,24 +53,27 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// check that the input is not null
 		if (input == null) {
-//			TODO(@sach): change == to .equals
-			System.out.println("Invalid Input: null input");
+			// TODO(@sach): change == to .equals
+			System.out.println("Invalid Input: null Input");
 //			System.exit(0); // fix these panics
 		}
 			
-		// check that the input is not null
-			if (input == null) {
-//				TODO(@sach): change == to .equals
-				System.out.println("Invalid Input: null input");
-//				System.exit(0); // fix these panics
-		}
+		// check that the input is not blank
+			if (input.isBlank()) {
+				// TODO(@sach): change == to .equals
+				System.out.println("Invalid Input: Blank Input");
+				return null;
+			}
+			
+		// check that the input is not blank
+			if (input.isBlank()) {
+				// TODO(@sach): change == to .equals
+				System.out.println("Invalid Input: Empty Input");
+				return null;
+			}
 		
 		// removes any non digit from string
 		input = input.replaceAll(include_regex.pattern(), "");
-		
-		// removes any .. from string
-		// remove all white spaces (trailing, leading, in-between)
-//		input = input.replaceAll(exclude_regex.pattern(), "");
 		
 		// spilt the input based on the delimiter ","
 		String [] split_input = input.split(",");
@@ -103,7 +106,9 @@ public class Demo implements NumberRangeSummarizer {
 			result.add(num);
 		}
 		
+		// sort the elements in the result
 		Arrays.sort(result.toArray());
+		
 		// remove added white-spaces and parenthesis
 		return result.toString().replaceAll("[\\[\\]\\s]", "");
 		
@@ -111,7 +116,10 @@ public class Demo implements NumberRangeSummarizer {
 
 	/**
 	 * collect method explanation
-	 * returns
+	 * removes decimals
+	 * removes white-spaces
+	 * in the case of blank or null input, it returns null and posts a message
+	 * returns a sorted list of integers or null
 	 */
 	@Override
 	public Collection<Integer> collect(String input) {
@@ -144,20 +152,21 @@ public class Demo implements NumberRangeSummarizer {
 			
 			result.add(tempInt);
 		}
-		System.out.println(result);
+//		System.out.println(result);
 		return result;
 	}
 
 	/**
 	 * summarizeCollection method explanation
-	 * returns
+	 * takes an a list of natural numbers sorted in ascending order
+	 * groups consecutive numbers into a range
+	 * returns a string representing a summary of the numbers
 	 */
 	@Override
 	public String summarizeCollection(Collection<Integer> input) {
 			ArrayList<Integer> arr = new ArrayList<>(input);
 			
 			// create a sorted list
-			// TODO(@sach): move this to the sanitize data method
 			Collections.sort(arr);
 			
 			ArrayList<String> result = new ArrayList<>();
@@ -228,11 +237,11 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	public static void main(String[] args) {
 		
-		NumberRangeSummarizer obj = new Demo();
-		String input = "-1,-2,-3,6,7,8,12.4,1  3,14,15,21,22,23,24,31";
-		System.out.println(input);
-		Collection<Integer> actual = obj.collect(input);
-		System.out.println(obj.summarizeCollection(actual));
+//		NumberRangeSummarizer obj = new Demo();
+//		String input = "63, 291, -93, 500, 7, -26, -77, 118, 76, 169, 192, -188, 237, 9, 117, 310, 463, -59, 497, 133, -98, 484, 400, 135, 266, -24, -110, 91, -134, 470, 297, 141, 16, 5, -197, -162, 324, 406, 453, -104, -152, 153, 180, 235, 432, -179, -105, 197, 272, 44, 283";
+//		System.out.println(input);
+//		Collection<Integer> actual = obj.collect(input);
+//		System.out.println(obj.summarizeCollection(actual));
 		System.out.println("Done");
 	}
 
