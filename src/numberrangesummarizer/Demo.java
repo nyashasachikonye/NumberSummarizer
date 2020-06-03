@@ -75,6 +75,7 @@ public class Demo implements NumberRangeSummarizer {
 	
 //	TODO(@sach): implement me
 	public String sanitize(String input) {
+		
 //		use methods:
 //			isNumeric
 //			isEscapeCharacter
@@ -177,36 +178,59 @@ public class Demo implements NumberRangeSummarizer {
 			ArrayList<Integer> arr = new ArrayList<>(input);
 			
 			// create a sorted list
+			// TODO(@sach): move this to the sanitize data method
 			Collections.sort(arr);
 			
 			ArrayList<String> result = new ArrayList<>();
 			
 //			can you use a lambda expression here?
-			  for (int i = 0; i < arr.size(); i++) {
-			   Integer j = arr.get(i);
-			   
-			   if (i == arr.size()-1){
-				   // what about the other toString way for integers?
-			     result.add(Integer.toString(j));
-			   }
-			 
-			   if ((i + 1 < arr.size()) && (j+1 != arr.get(i + 1))) {
-			   result.add(Integer.toString(j));
-			   } else {
-			     Integer last = 0;
-			     for (int z = i+1; z < arr.size(); z++) {
-			       if (z+1 < arr.size() && (arr.get(z)+1 == arr.get(z + 1))) {
-			         continue;
-			       } else {
-			         last = arr.get(z);
-			      // extend the range of the last element in the result set
-			         result.add(String.format("%s-%s", j, last));
-			         i = z ;
-			         z = arr.size();
+			// loop through the values
+			  for (int firstElementIndex = 0; firstElementIndex < arr.size(); firstElementIndex++) {
+				  // obtain the current iterations variable
+				  Integer firstElement = arr.get(firstElementIndex);
+				  
+				  // if the element is the last element
+				  if (firstElementIndex == arr.size()-1){
+					  // add this element to the result
+					  result.add(Integer.toString(firstElement));
+				  }
+				  
+				  
+				  // check that the this is not the last element
+				  // check that the next element is not consecutive
+				  if ((firstElementIndex + 1 < arr.size()) && (firstElement+1 != arr.get(firstElementIndex + 1))) {
+					// add this element to the result
+					  result.add(Integer.toString(firstElement));
+					  }
+				  else {
+					// if the element is consecutive
+			     Integer lastElement = 0;
+			     // advance and seek for the next element that is consecutive
+			     for (int z = firstElementIndex+1; z < arr.size(); z++) {
+			    	 // if the next element is consecutive, range detected
+			    	 if (z+1 < arr.size() && (arr.get(z)+1 == arr.get(z + 1))) {
+			    		 // advance the iterator
+			    		 continue;
+			    	} 
+			    	 else {
+			    		 // if the next element is not consecutive, range ended
+			    		 // obtain the last element
+			    		 lastElement = arr.get(z);
+			    		 
+			    		 // store the range to the result
+			    		 result.add(String.format("%s-%s", firstElement, lastElement));
+			    		 
+			    		 // advance the iterator
+			    		 firstElementIndex = z ;
+			    		 
+			    		 // 
+			    		 z = arr.size();
 			       }
 			     }
 			   }
 			  }
+			  
+			  // return the result as a string
 				String string_result = "";
 				for(String num_range : result) {
 					string_result = string_result + num_range + ", ";
@@ -234,3 +258,5 @@ public class Demo implements NumberRangeSummarizer {
 	}
 
 }
+
+// what about the other toString way for integers?
