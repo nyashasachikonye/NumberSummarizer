@@ -16,6 +16,11 @@ numbers and zero)
 * decimal numbers (positive decimals, negative decimals)
 * or any combination of these
 
+		/**
+		 * ASSUMPTION: the values will be supplied as comma delimited numbers
+		 * FUTURE FEATURE: easily change the delimiter
+		 **/
+
 * Features
 - comes complete with tests
 

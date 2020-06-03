@@ -71,7 +71,7 @@ public class Demo implements NumberRangeSummarizer {
 		
 		// check that the input is not null
 		if (input == null) {
-//			@TODO(@sach): change == to .equals
+//			TODO(@sach): change == to .equals
 			System.out.println("Invalid Input: null input");
 //			System.exit(0); // fix these panics
 		}
@@ -85,6 +85,9 @@ public class Demo implements NumberRangeSummarizer {
 		// TODO(@sach): combine all the regexes into one method (isNumeric(String input))
 		
 		//TODO(@sach): remove decimal
+		
+//		input = input.replaceAll("\\D", "");
+//		System.exit(0);
 		
 		// remove all white spaces (trailing, leading, in-between)
 		input = input.replaceAll("\\s","");
@@ -140,7 +143,6 @@ public class Demo implements NumberRangeSummarizer {
 			}
 			
 			result.add(tempInt);
-//			System.out.println(Arrays.toString(result.toArray()));
 		}
 //		System.out.println(result);
 		return result;
@@ -203,8 +205,10 @@ public class Demo implements NumberRangeSummarizer {
 	 */
 	public static void main(String[] args) {
 		
-//		NumberRangeSummarizer obj = new Demo();
-//		obj.summarizeCollection(input);
+		NumberRangeSummarizer obj = new Demo();
+		String input = "-1,-2,-3,6,7,8,12,13,14,15,21,22,23,24,31";
+		Collection<Integer> actual = obj.collect(input);
+		System.out.println(obj.summarizeCollection(actual));
 		System.out.println("Done");
 	}
 
