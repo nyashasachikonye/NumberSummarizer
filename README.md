@@ -2,55 +2,27 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### Number Range Summarizer ###
 
 * Quick summary
 
-num range summarizer is a function/library designed to convert a
-comma delimited string of values into a summarized string of values, wherein
-consecutive numbers are combined into a range.
+The number range summarizer is a library designed to convert a comma delimited string of numerical values
+into a summarized string of values that are arranged in ascending order. The number range summarizer ensures
+that wherein two or more numerical values are found to be consectutive, they will be summarized into a range.
 
-the ibrary is able to summarise the following values:
-* integers (positve natural numbers, negative natural
-numbers and zero)
+The library has been designed to summarise the following values:
+* Integers (positve natural numbers, negative natural numbers including zero)
 
-the library does not summarise the following values:
-* decimals
-* numbers expressed in scientific notation
+The library has been built as robustly, thus handles "dirty" inputs that include non-numeric characters and 
+symbols, as well as white spaces and other non printable characters.
 
-		/**
-		 * ASSUMPTION: the values will be supplied as comma delimited numbers
-		 * FUTURE FEATURE: easily change the delimiter
-		 **/
+The library does a best effort cleaning of data. Decimal values are removed from the input.
 
 * Features
-- comes complete with tests
+- The library is complete with the tests that indicate the cases that have been covered and 
+it has been designed in such a way at to be extensible and readble for future reviews.
 
-* Limitations
-- Max Size of Input
 
-* Example
-- show gif
-
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Running
+- This library was designed as a java project in eclipse, thus can easily be imported and run using Java8 and 
+JUnit5. Otherwise from the command line.
