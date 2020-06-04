@@ -18,6 +18,30 @@ public class Summarizer implements NumberRangeSummarizer {
 	/**
     * TODO(@sach) : method explain
     */
+    /**
+     * TODO(@sach) : method explain
+     * collect method explanation
+     * removes decimals
+     * removes white-spaces
+     * in the case of blank or null input, it returns null and posts a message
+     * returns a sorted list of integers or null
+     */
+	/**
+     * Performs some safety checks for null input and empty input
+     * then proceeds to sort received input. Finally this method consumes
+     * the input to create a comma delimited number summary for a given
+     * range of numbers, grouping the numbers into a range when
+     * they are sequential. 
+     * 
+     * @return	string of comma-delimited numbers, in ascending order where
+     * 			consecutive numbers have been grouped.
+     * 
+     * 			this function can also return null on encountering a null or
+     * 			empty input
+     *
+     * @param	input: a sanitized list of Integers
+     */
+	
     public String sanitize(String input) {
 
         // check that the input is not null
@@ -96,14 +120,22 @@ public class Summarizer implements NumberRangeSummarizer {
         return result.toString().replaceAll("[\\[\\]\\s]", "");
 
     }
-
+    
     /**
-     * TODO(@sach) : method explain
-     * collect method explanation
-     * removes decimals
-     * removes white-spaces
-     * in the case of blank or null input, it returns null and posts a message
-     * returns a sorted list of integers or null
+     * Collects and parses the input of a comma delimited string of characters
+     * to return a sanitized list of Integers sorted in ascending order and safe
+     * for performing a summary operation. 
+     * 
+     * Safety checks for null input are performed and this method may return null
+     * if the conversion of the characters has failed or a null input has been
+     * supplied. In such a case the reason for failure is reported to the console.
+     * 
+     * @return	a sanitized list of Integers
+     *  
+     * 			this function can also return null on encountering a null or
+     * 			empty input
+     *
+     * @param	input: a random assortment of comma-delimited characters
      */
     @Override
     public Collection <Integer> collect(String input) {
@@ -155,7 +187,7 @@ public class Summarizer implements NumberRangeSummarizer {
      * 			this function can also return null on encountering a null or
      * 			empty input
      *
-     * @param	input: a sanitized list of numerical values
+     * @param	input: a sanitized list of Integers
      */
     @Override
     public String summarizeCollection(Collection <Integer> input) {

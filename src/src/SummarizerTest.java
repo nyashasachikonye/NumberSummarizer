@@ -16,9 +16,13 @@ import org.junit.jupiter.api.Test;
  */
 class SummarizerTest {
 
-	// tests for collect method
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * This is considered the golden path input where the user provides
+	 * a string of integers that are in sorted ascending order, without any non-digit characters
+	 * or escape characters.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order
 	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
@@ -31,7 +35,11 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provided input contains negative numbers the collect method is able to recognize the
+	 * negative numbers as valid values, thereby including these numbers in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order.
 	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
@@ -44,7 +52,11 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provided input contains decimal numbers the collect method is removes these
+	 * values as invalid values, thus they are not included in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order without the decimal numbers.
 	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
@@ -57,7 +69,12 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provided input contains duplicate numbers the collect method is removes these
+	 * values as invalid values, such that only a single occurance remains thus they are not included
+	 * in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order.
 	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
@@ -70,8 +87,11 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
-	 * {@link Summarizer.Demo#collect(java.lang.String)}. null input test
+	 * When the user provides and null input the collect method correctly returns a null value.
+	 * 
+	 * The test asserts that expected null will be returned from the collect method.
+	 * An informative log is shown in the console.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectNullInput() {
@@ -82,8 +102,13 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
-	 * {@link Summarizer.Demo#collect(java.lang.String)}. non digit test
+	 * When the user provided input contains non digit numbers such as symbols or letters,
+	 * the collect method is removes these values as invalid values, such that 
+	 * they are not included in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order without non-numeric characters.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectNonNumericInput() {
@@ -95,8 +120,13 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
-	 * {@link Summarizer.Demo#collect(java.lang.String)}. hanging commas
+	 * When the user provided input contains non digit numbers such as commas,
+	 * the collect method is removes these values as invalid values, such that 
+	 * they are not included in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order without non-numeric characters.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 * test
 	 */
 	@Test
@@ -109,9 +139,13 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
-	 * {@link Summarizer.Demo#collect(java.lang.String)}. white spaces
-	 * test
+	 * When the user provided input contains non digit numbers such as white-spaces,
+	 * the collect method is removes these values as invalid values, such that 
+	 * they are not included in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order without extra white-spaces.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectWhiteSpacesInput() {
@@ -123,24 +157,31 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provided input contains non digit numbers such as escape characters,
+	 * the collect method is returns a null as the result.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as a null value without any further processing. An informative log is shown in the console.
 	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}. escape
 	 * characters test
 	 */
-	// @Test
-	// void testCollectEscapeCharacters() {
-	// Summarizer demo = new Summarizer();
-	// Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14,
-	// 15, 21, 22, 23, 24, 31);
-	// String input = "\"&,*,1,2,{,|,3,\\\\,6,\\n,7,@,8,12,-,13,$,14,15,+,
-	// 21,22,),23,24,31\"";
-	// Collection<Integer> actual = demo.collect(input);
-	// assertEquals(expected, actual);
-	// }
+	 @Test
+	 void testCollectEscapeCharacters() {
+	 Summarizer demo = new Summarizer();
+	 String input = "\"&,*,1,2,{,|,3,\\\\,6,\\n,7,@,8,12,-,13,$,14,15,"
+	 + "21,22,),23,24,31\"";
+	 Collection<Integer> actual = demo.collect(input);
+	 assertNull(actual);
+	 }
 
-	// tests for summarizeCollection method
-	/**
-	 * TODO(@sach) : test explain Test method for
+	 /**
+		 * This is considered the golden path input where the user provides
+		 * a string of integers that are in sorted ascending order, without any non-digit characters
+		 * or escape characters.
+		 * 
+		 * The test asserts that the provided input will be returned from the collect method
+		 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+		 * together to form a range.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
@@ -153,7 +194,12 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provided input contains negative numbers the SummarizeCollection method is able to recognize the
+	 * negative numbers as valid values, thereby including these numbers in the resultant list.
+	 * 
+	 * The test asserts that the provided input will be returned from the collect method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
@@ -166,7 +212,10 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provides and null input the SummarizeCollection method correctly returns a null value.
+	 * 
+	 * The test asserts that expected null will be returned from the SummarizeCollection method.
+	 * An informative log is shown in the console.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
