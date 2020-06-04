@@ -16,17 +16,6 @@ import java.util.Arrays;
 public class Summarizer implements NumberRangeSummarizer {
 
 	/**
-    * TODO(@sach) : method explain
-    */
-    /**
-     * TODO(@sach) : method explain
-     * collect method explanation
-     * removes decimals
-     * removes white-spaces
-     * in the case of blank or null input, it returns null and posts a message
-     * returns a sorted list of integers or null
-     */
-	/**
      * Performs some safety checks for null input and empty input
      * then proceeds to sort received input. Finally this method consumes
      * the input to create a comma delimited number summary for a given
