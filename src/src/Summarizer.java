@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @author Sach
  *
  */
-public class Demo implements NumberRangeSummarizer {
+public class Summarizer implements NumberRangeSummarizer {
 
 	/**
     * TODO(@sach) : method explain
@@ -234,7 +234,7 @@ public class Demo implements NumberRangeSummarizer {
      */
     public static void main(String[] args) {
 
-        		NumberRangeSummarizer obj = new Demo();
+        		NumberRangeSummarizer obj = new Summarizer();
         		String input = "-1377, -1348, -1347, -1368, ghd, -1352, -1384, -1370, -1383, -1388, -1351, -1380, -1358, -1371, -1344, -1381, -1372, -1355, -1360, -1361, -1378, -1345, -1382, -1356, -1366, -1364, -1373, -1369, -1367, -1379, -1353, -1374, -1385, -1363, -1342, -1365, -1359, -1362, -1350, -1341, -1357, -1376, -1346, -1390, -1349, -1354, -1389, -1387, -1386, -1375";
         		System.out.println(input);
         		Collection<Integer> actual = obj.collect(input);

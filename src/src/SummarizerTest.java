@@ -14,16 +14,16 @@ import org.junit.jupiter.api.Test;
  * @author Sach
  *
  */
-class DemoTest {
+class SummarizerTest {
 
 	// tests for collect method
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectGoldenPath() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String input = "1,2,3,6,7,8,12,13,14,15,21,22,23,24,31";
 		Collection<Integer> actual = demo.collect(input);
@@ -32,11 +32,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectNegativeNumbersInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(-1, -2, -3, 6, 7);
 		String input = "-1,-2,-3,6,7";
 		Collection<Integer> actual = demo.collect(input);
@@ -45,11 +45,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectDecimalNumbersInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(-1, -2, 6, 7, 8);
 		String input = "-1,-2,-3.5,6,7,8,12.4";
 		Collection<Integer> actual = demo.collect(input);
@@ -58,11 +58,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
 	 */
 	@Test
 	void testCollectDuplicateNumbersInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(-1, 8, 6, 7);
 		String input = "-1,8,6,7,8,-1";
 		Collection<Integer> actual = demo.collect(input);
@@ -71,11 +71,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}. null input test
+	 * {@link Summarizer.Demo#collect(java.lang.String)}. null input test
 	 */
 	@Test
 	void testCollectNullInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		String input = null;
 		Collection<Integer> actual = demo.collect(input);
 		assertNull(actual);
@@ -83,11 +83,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}. non digit test
+	 * {@link Summarizer.Demo#collect(java.lang.String)}. non digit test
 	 */
 	@Test
 	void testCollectNonNumericInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String input = "&,*, 1,2,3,6,7,@,8,12,13,14h,15,dksg,21,22,23,24,31";
 		Collection<Integer> actual = demo.collect(input);
@@ -96,12 +96,12 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}. hanging commas
+	 * {@link Summarizer.Demo#collect(java.lang.String)}. hanging commas
 	 * test
 	 */
 	@Test
 	void testCollectHangingCommaInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String input = ",,,,1,2,3,6,7,8,12,,,13,14,15,21,22,23,24,31,,,";
 		Collection<Integer> actual = demo.collect(input);
@@ -110,12 +110,12 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#collect(java.lang.String)}. white spaces
+	 * {@link Summarizer.Demo#collect(java.lang.String)}. white spaces
 	 * test
 	 */
 	@Test
 	void testCollectWhiteSpacesInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22);
 		String input = "1,2, 3,  6,7 ,8,12  ,13,1 4,1  5, 2 1 ,  2  2  ";
 		Collection<Integer> actual = demo.collect(input);
@@ -129,7 +129,7 @@ class DemoTest {
 	 */
 	// @Test
 	// void testCollectEscapeCharacters() {
-	// Demo demo = new Demo();
+	// Summarizer demo = new Summarizer();
 	// Collection<Integer> expected = Arrays.asList(1, 2, 3, 6, 7, 8, 12, 13, 14,
 	// 15, 21, 22, 23, 24, 31);
 	// String input = "\"&,*,1,2,{,|,3,\\\\,6,\\n,7,@,8,12,-,13,$,14,15,+,
@@ -141,11 +141,11 @@ class DemoTest {
 	// tests for summarizeCollection method
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionGoldenPath() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(1, 3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String expected = "1, 3, 6-8, 12-15, 21-24, 31";
 		String actual = demo.summarizeCollection(input);
@@ -154,11 +154,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionNegativeNumbers() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(-8, -4, -1, -2, -3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31);
 		String expected = "-8, -4--1, 6-8, 12-15, 21-24, 31";
 		String actual = demo.summarizeCollection(input);
@@ -167,11 +167,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionEmptyList() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList();
 		String actual = demo.summarizeCollection(input);
 		assertNull(actual);
@@ -179,11 +179,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionNullInput() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		String actual = demo.summarizeCollection(null);
 		assertNull(actual);
 	}
@@ -191,11 +191,11 @@ class DemoTest {
 	// mono range tests
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionMonoRangePositive() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(32, 26, 42, 7, 8, 33, 25, 19, 24, 44, 49, 21, 31, 37, 50, 35, 6, 28,
 				47, 34, 27, 17, 12, 1, 41, 23, 46, 30, 2, 9, 18, 20, 40, 36, 48, 5, 15, 4, 39, 43, 13, 14, 10, 11, 45,
 				3, 38, 16, 22, 29);
@@ -206,11 +206,11 @@ class DemoTest {
 
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionMonoRangeNegative() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(-1377, -1348, -1347, -1368, -1343, -1352, -1384, -1370, -1383, -1388,
 				-1351, -1380, -1358, -1371, -1344, -1381, -1372, -1355, -1360, -1361, -1378, -1345, -1382, -1356, -1366,
 				-1364, -1373, -1369, -1367, -1379, -1353, -1374, -1385, -1363, -1342, -1365, -1359, -1362, -1350, -1341,
@@ -223,14 +223,14 @@ class DemoTest {
 	// multi range tests
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 * // You requested 1 sets with ?? unique random integers in each, taken from
 	 * the [1-550] range. // The integers in each set were sorted in ascending
 	 * order.
 	 */
 	@Test
 	void testSummarizeCollectionMultiRangePositive() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(233, 389, 279, 254, 392, 263, 221, 301, 531, 518, 373, 523, 177, 390,
 				466, 208, 136, 541, 349, 211, 158, 422, 397, 82, 260, 243, 495, 326, 365, 112, 472, 283, 8, 352, 393,
 				216, 78, 460, 262, 15, 51, 284, 336, 414, 330, 359, 245, 97, 111, 275, 17, 418, 528, 406, 398, 280, 276,
@@ -267,13 +267,13 @@ class DemoTest {
 	// disparate ranges positive and negative test
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 * 1 set with 50 unique random integers, taken from the [-200,500] range. The
 	 * integers were not sorted.
 	 */
 	@Test
 	void testSummarizeCollectionDisparateMultiRangePositiveNegative() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(63, 291, -93, 500, 7, -26, -77, 118, 76, 169, 192, -188, 237, 9, 117,
 				310, 463, -59, 497, 133, -98, 484, 400, 135, 266, -24, -110, 91, -134, 470, 297, 141, 16, 5, -197, -162,
 				324, 406, 453, -104, -152, 153, 180, 235, 432, -179, -105, 197, 272, 44, 283);
@@ -287,11 +287,11 @@ class DemoTest {
 	// discontinuity test
 	/**
 	 * TODO(@sach) : test explain Test method for
-	 * {@link numberrangesummarizer.Demo#summarizeCollection(java.util.Collection)}.
+	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
 	void testSummarizeCollectionDiscontinuityTest() {
-		Demo demo = new Demo();
+		Summarizer demo = new Summarizer();
 		Collection<Integer> input = Arrays.asList(-3, -2, -1, 0, 1, 2, 3);
 		String expected = "-3-3";
 		String actual = demo.summarizeCollection(input);
