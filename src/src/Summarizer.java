@@ -39,7 +39,7 @@ public class Summarizer implements NumberRangeSummarizer {
      * 			this function can also return null on encountering a null or
      * 			empty input
      *
-     * @param	input: a sanitized list of Integers
+     * @param	input: a sanitized string of Integers
      */
 	
     public String sanitize(String input) {
@@ -135,7 +135,7 @@ public class Summarizer implements NumberRangeSummarizer {
      * 			this function can also return null on encountering a null or
      * 			empty input
      *
-     * @param	input: a random assortment of comma-delimited characters
+     * @param	input: a random assortment of comma-delimited characters as a string
      */
     @Override
     public Collection <Integer> collect(String input) {
