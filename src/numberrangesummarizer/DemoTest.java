@@ -52,6 +52,18 @@ class DemoTest {
         Collection < Integer > actual = demo.collect(input);
         assertEquals(expected, actual);
     }
+    
+    /**
+     * Test method for {@link numberrangesummarizer.Demo#collect(java.lang.String)}.
+     */
+    @Test
+    void testCollectDuplicateNumbersInput() {
+        Demo demo = new Demo();
+        Collection < Integer > expected = Arrays.asList(-1, 8, 6, 7);
+        String input = "-1,8,6,7,8,-1";
+        Collection < Integer > actual = demo.collect(input);
+        assertEquals(expected, actual);
+    }
 
     //		TODO(@sach): implement this test
     //		/**

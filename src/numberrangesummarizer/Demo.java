@@ -46,34 +46,22 @@ public class Demo implements NumberRangeSummarizer {
         +
         "]");
 
-    // TODO(@sach): utilize this method and combine the other regexes 
-    //	public boolean isNumeric(String strNum) {
-    //	    if (strNum == null) {
-    //		@TODO(@sach): change == to .equals
-    //	        return false; 
-    //	    }
-    //	    return pattern.matcher(strNum).matches();
-    //	}
-
     public String sanitize(String input) {
 
         // check that the input is not null
         if (input == null) {
-            // TODO(@sach): change == to .equals
             System.out.println("Invalid Input: null Input");
-            //			System.exit(0); // fix these panics
+            return null;
         }
 
         // check that the input is not blank
         if (input.isBlank()) {
-            // TODO(@sach): change == to .equals
             System.out.println("Invalid Input: Blank Input");
             return null;
         }
 
         // check that the input is not blank
         if (input.isBlank()) {
-            // TODO(@sach): change == to .equals
             System.out.println("Invalid Input: Empty Input");
             return null;
         }
@@ -140,7 +128,8 @@ public class Demo implements NumberRangeSummarizer {
 
         // spilt the input based on the delimiter ","
         String[] split_input = input.split(",");
-        // convert all the elements of the array to Integer values
+        
+        // convert all the elements of the list to Integer values
         for (String num: split_input) {
             // convert to integer
             try {
@@ -150,14 +139,10 @@ public class Demo implements NumberRangeSummarizer {
                 System.out.println("Invalid Input");
                 System.exit(0); // fix these panics
             }
-            // remove duplicates
-            if (result.contains(tempInt)) {
-                continue;
-            }
-
+            
             result.add(tempInt);
         }
-        //		System.out.println(result);
+//        System.out.println(result);
         return result;
     }
 
@@ -168,18 +153,18 @@ public class Demo implements NumberRangeSummarizer {
      * returns a string representing a summary of the numbers
      */
     @Override
-    public String summarizeCollection(Collection < Integer > input) {
-        ArrayList < Integer > arr = new ArrayList < > (input);
+    public String summarizeCollection(Collection <Integer> input) {
+        ArrayList <Integer> arr = new ArrayList <> (input);
 
-        // create a sorted list
+        // sort the list
         Collections.sort(arr);
 
-        ArrayList < String > result = new ArrayList < > ();
+        // create a result array
+        ArrayList <String> result = new ArrayList <> ();
 
-        //			can you use a lambda expression here?
-        // loop through the values
+        // loop through the list of values
         for (int firstElementIndex = 0; firstElementIndex < arr.size(); firstElementIndex++) {
-            // obtain the current iterations variable
+            // obtain the current element
             Integer firstElement = arr.get(firstElementIndex);
 
             // if the element is the last element
@@ -188,15 +173,15 @@ public class Demo implements NumberRangeSummarizer {
                 result.add(Integer.toString(firstElement));
             }
 
-            // check that the this is not the last element
-            // check that the next element is not consecutive
+            // check that the this is not the last element & 
+            // the next element is not consecutive
             if ((firstElementIndex + 1 < arr.size()) && (firstElement + 1 != arr.get(firstElementIndex + 1))) {
                 // add this element to the result
                 result.add(Integer.toString(firstElement));
             } else {
                 // if the element is consecutive
-
                 Integer lastElement = 0;
+                
                 // advance and seek for the next element that is consecutive
                 for (int z = firstElementIndex + 1; z < arr.size(); z++) {
                     // if the next element is consecutive, range detected
@@ -214,25 +199,13 @@ public class Demo implements NumberRangeSummarizer {
                         // advance the iterator
                         firstElementIndex = z;
 
-                        // 
                         z = arr.size();
                     }
                 }
             }
         }
 
-        // return the result as a string
-        String string_result = "";
-        for (String num_range: result) {
-            string_result = string_result + num_range + ", ";
-        };
-
-        // trim last comma
-        // use regex for this
-        string_result = string_result.substring(0, string_result.length() - 2);
-
-        //				System.out.println(string_result);
-        return string_result;
+        return result.toString().replaceAll("[\\[\\]]", "");
     }
 
     /**
@@ -240,14 +213,12 @@ public class Demo implements NumberRangeSummarizer {
      */
     public static void main(String[] args) {
 
-        //		NumberRangeSummarizer obj = new Demo();
-        //		String input = "63, 291, -93, 500, 7, -26, -77, 118, 76, 169, 192, -188, 237, 9, 117, 310, 463, -59, 497, 133, -98, 484, 400, 135, 266, -24, -110, 91, -134, 470, 297, 141, 16, 5, -197, -162, 324, 406, 453, -104, -152, 153, 180, 235, 432, -179, -105, 197, 272, 44, 283";
-        //		System.out.println(input);
-        //		Collection<Integer> actual = obj.collect(input);
-        //		System.out.println(obj.summarizeCollection(actual));
+        		NumberRangeSummarizer obj = new Demo();
+        		String input = "-8, -4, -1, -2, -3, 6, 7, 8, 12, 13, 14, 15, 21, 22, 23, 24, 31";
+        		System.out.println(input);
+        		Collection<Integer> actual = obj.collect(input);
+        		System.out.println(obj.summarizeCollection(actual));
         System.out.println("Done");
     }
 
 }
-
-// what about the other toString way for integers?
