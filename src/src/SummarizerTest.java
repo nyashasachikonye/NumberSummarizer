@@ -197,7 +197,7 @@ class SummarizerTest {
 	 * When the user provided input contains negative numbers the SummarizeCollection method is able to recognize the
 	 * negative numbers as valid values, thereby including these numbers in the resultant list.
 	 * 
-	 * The test asserts that the provided input will be returned from the collect method
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
 	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
 	 * together to form a range.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
@@ -212,7 +212,7 @@ class SummarizerTest {
 	}
 
 	/**
-	 * When the user provides and null input the SummarizeCollection method correctly returns a null value.
+	 * When the user provides an empty list input the SummarizeCollection method correctly returns a null value.
 	 * 
 	 * The test asserts that expected null will be returned from the SummarizeCollection method.
 	 * An informative log is shown in the console.
@@ -227,7 +227,9 @@ class SummarizerTest {
 	}
 
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * When the user provides and null input the SummarizeCollection method correctly returns a null value.
+	 * 
+	 * The test asserts that expected null will be returned from the SummarizeCollection method.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
@@ -239,7 +241,12 @@ class SummarizerTest {
 
 	// mono range tests
 	/**
-	 * TODO(@sach) : test explain Test method for
+	 * Where the user provides a string of positive integers that are in random order, without any non-digit
+	 * characters or escape characters.
+	 * 
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
@@ -253,8 +260,12 @@ class SummarizerTest {
 		assertEquals(expected, actual);
 	}
 
-	/**
-	 * TODO(@sach) : test explain Test method for
+	/** Where the user provides a string of negative integers that are in random order, without any non-digit
+	 * characters or escape characters.
+	 * 
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
@@ -270,12 +281,16 @@ class SummarizerTest {
 	}
 
 	// multi range tests
-	/**
-	 * TODO(@sach) : test explain Test method for
+	/** Where the user provides a string of both positive and negative integers that are in random order,
+	 *  without any non-digit characters or escape characters. 1 sets with unique random integers in each, taken from
+	 * the [1-550] range.
+	 * 
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range.
+	 * 
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
-	 * // You requested 1 sets with ?? unique random integers in each, taken from
-	 * the [1-550] range. // The integers in each set were sorted in ascending
-	 * order.
+	 * 
 	 */
 	@Test
 	void testSummarizeCollectionMultiRangePositive() {
@@ -313,11 +328,16 @@ class SummarizerTest {
 		assertEquals(expected, actual);
 	}
 
-	// disparate ranges positive and negative test
-	/**
-	 * TODO(@sach) : test explain Test method for
+	/** Where the user provides a string of both positive and negative integers that are in random order,
+	 *  without any non-digit characters or escape characters. 1 sets with disparate unique random integers in each, taken from
+	 * the [1-550] range.
+	 * 
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range.
+	 * 
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
-	 * 1 set with 50 unique random integers, taken from the [-200,500] range. The
+	 *  range. The
 	 * integers were not sorted.
 	 */
 	@Test
@@ -333,9 +353,12 @@ class SummarizerTest {
 		assertEquals(expected, actual);
 	}
 
-	// discontinuity test
-	/**
-	 * TODO(@sach) : test explain Test method for
+	/** Where the user provides a string of both positive and negative integers, where there is a sequence of
+	 * numbers that change sign from negative to positive.
+	 * 
+	 * The test asserts that the provided input will be returned from the SummarizeCollection method
+	 * as list of comma-delimited integers in ascending order, where sequential numbers are grouped
+	 * together to form a range even across the zero boundary.
 	 * {@link Summarizer.Demo#summarizeCollection(java.util.Collection)}.
 	 */
 	@Test
