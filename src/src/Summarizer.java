@@ -143,11 +143,19 @@ public class Summarizer implements NumberRangeSummarizer {
     }
 
     /**
-     * TODO(@sach) : method explain
-     * summarizeCollection method explanation
-     * takes an a list of natural numbers sorted in ascending order
-     * groups consecutive numbers into a range
-     * returns a string representing a summary of the numbers or null
+     * Performs some safety checks for null input and empty input
+     * then proceeds to sort received input. Finally this method consumes
+     * the input to create a comma delimited number summary for a given
+     * range of numbers, grouping the numbers into a range when
+     * they are sequential. 
+     * 
+     * @return	string of comma-delimited numbers, in ascending order where
+     * 			consecutive numbers have been grouped.
+     * 
+     * 			this function can also return null on encountering a null or
+     * 			empty input
+     *
+     * @param	input: a sanitized list of numerical values
      */
     @Override
     public String summarizeCollection(Collection <Integer> input) {
