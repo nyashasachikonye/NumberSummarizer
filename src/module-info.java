@@ -1,10 +1,3 @@
-/**
- * 
- */
-/**
- * @author Sach
- *
- */
-module numberRangeSummarizer {
+module src {
 	requires org.junit.jupiter.api;
 }
