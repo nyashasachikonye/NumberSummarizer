@@ -16,9 +16,9 @@ package src;
 //
 //NUmberRange[] = result
 //
-//calss NUmberRangeSUmmary{
+//class NUmberRangeSUmmary{
 //	
-//	NumberRange[] reusult
+//	NumberRange[] result
 //	
 //	toString
 //}
@@ -112,7 +112,7 @@ public class NumberRange {
 	
 	// this method determines if the number range is really a range
 	public boolean isRange() {
-		return this.start.equals(this.end);
+		return !this.start.equals(this.end);
 	}
 
 	// this method gives the right representation of the number range
