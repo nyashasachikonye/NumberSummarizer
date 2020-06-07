@@ -100,6 +100,36 @@ class SummarizerTest {
 		Collection<Integer> actual = demo.collect(input);
 		assertNull(actual);
 	}
+	
+	/**
+	 * When the user provides and null input the collect method correctly returns a .. value.
+	 * 
+	 * The test asserts that expected ..  will be returned from the collect method.
+	 * An informative log is shown in the console.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
+	 */
+	@Test
+	void testCollectBlankInput() {
+		Summarizer demo = new Summarizer();
+		String input = "";
+		Collection<Integer> actual = demo.collect(input);
+		assertNull(actual);
+	}
+	
+	/**
+	 * When the user provides an empty input the collect method correctly returns a .. value.
+	 * 
+	 * The test asserts that expected ..  will be returned from the collect method.
+	 * An informative log is shown in the console.
+	 * {@link Summarizer.Demo#collect(java.lang.String)}.
+	 */
+	@Test
+	void testCollectEmptyInput() {
+		Summarizer demo = new Summarizer();
+		String input = " ";
+		Collection<Integer> actual = demo.collect(input);
+		assertNull(actual);
+	}
 
 	/**
 	 * When the user provided input contains non digit numbers such as symbols or letters,

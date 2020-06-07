@@ -31,24 +31,29 @@ public class Summarizer implements NumberRangeSummarizer {
      * @param	input: a sanitized string of Integers
      */
 	
+	class InvalidInputException extends RuntimeException{
+		
+		public InvalidInputException(String message) {
+	        super(message);
+	    }
+		
+	}
+	
     public String sanitize(String input) {
 
         // check that the input is not null
         if (input == null) {
-            System.out.println("Invalid Input: null Input");
-            return null;
+        	throw new InvalidInputException("Null Input");
         }
 
         // check that the input is not blank
         if (input.isBlank()) {
-            System.out.println("Invalid Input: Blank Input");
-            return null;
+        	throw new InvalidInputException("Blank Input");
         }
 
         // check that the input is not blank
         if (input.isBlank()) {
-            System.out.println("Invalid Input: Empty Input");
-            return null;
+        	throw new InvalidInputException("Empty Input");
         }
         
         // regex to determine valid characters in string
