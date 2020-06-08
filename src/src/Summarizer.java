@@ -225,7 +225,6 @@ public class Summarizer implements NumberRangeSummarizer {
 
             // check that the this is not the last element & 
             // the next element is not consecutive
-            
             nextElementIndex = currElementIndex + 1;
             if ((nextElementIndex < arr.size()) && (currElement + 1 != arr.get(nextElementIndex))) {
                 // add this element to the result
@@ -240,7 +239,8 @@ public class Summarizer implements NumberRangeSummarizer {
                 	
                 	// if the next element is consecutive, range detected
                     if (seekElementIndex + 1 < arr.size() && (seekElement + 1 == arr.get(seekElementIndex + 1))) {
-                        // advance the iterator
+                        // extend the range
+                    	// advance the iterator
                         continue;
                     } else {
                         // if the next element is not consecutive, range ended
