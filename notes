@@ -1,0 +1,4 @@
+why is this expression dangerous?
+
+// dangerous
+// List<String> result = new ArrayList<String>();

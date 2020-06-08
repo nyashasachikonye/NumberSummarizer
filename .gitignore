@@ -1,2 +1,6 @@
 *.class
 python_implementation/
+.classpath
+.project
+.settings/
+bin/
